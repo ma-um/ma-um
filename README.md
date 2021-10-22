@@ -1,4 +1,4 @@
-## :purple_heart:마음:purple_heart:
+## :purple_heart: 마음 :purple_heart:
 
 > **일기 기반 음악 추천 서비스**
 
@@ -49,8 +49,6 @@ https://www.erdcloud.com/d/JNCBKA983wkG2D8t7
 
 ## :fire: ​Getting Started
 
-
-
 <br>
 
 ## :sparkles: ​People
@@ -60,6 +58,8 @@ https://www.erdcloud.com/d/JNCBKA983wkG2D8t7
 - 양다연 : 안드로이드, 자연어 처리
 - 이현송 : BE(Spring Boot), 추천 시스템 개발
 - 장진우 : 자연어 처리
+
+<br>
 
 ## :heavy_check_mark: 진행상황
 21.10.22.금
