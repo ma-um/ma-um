@@ -1,4 +1,4 @@
-## 마음
+## :purple_heart:마음:purple_heart:
 
 > **일기 기반 음악 추천 서비스**
 
@@ -33,29 +33,6 @@ ver.1
 
 ## :wrench: ​Tech Stack
 
-<div align="center">
-![Vue.js](https://img.shields.io/badge/Vue.js-2.6.11-%234FC08D?logo=Vue.js)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.5.3-6DB33F?logo=SpringBoot)
-![Bootstrap](https://img.shields.io/badge/Bootstrap-4.3.1-%237952B3?logo=Bootstrap)
-![Javascript](https://img.shields.io/badge/Javascript-ES6-F7DF1E?logo=Javascript)
-
-
-![Java](https://img.shields.io/badge/Java-8.0.275-6DB33F?logo=Java)
-![Gradle](https://img.shields.io/badge/Gradle-6.7.1-02303A?logo=Gradle)
-![MySQL](https://img.shields.io/badge/MySQL-8.0.23-%234479A1?logo=MySQL)
-![Hibernate](https://img.shields.io/badge/Hibernate-5.4.27-59666C?logo=Hibernate)
-![Swagger](https://img.shields.io/badge/Swagger-2.9.2-%2385EA2D?logo=Swagger)
-
-![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04-E95420?logo=Ubuntu)
-![NGINX](https://img.shields.io/badge/NGINX-1.18.0-269539?logo=NGINX)
-![Let’s_Encrypt](https://img.shields.io/badge/Let’s_Encrypt-0.40.0-003A70?logo=Let’s-Encrypt)
-
-![Amazon AWS](https://img.shields.io/badge/Amazon%20AWS-RDS-%23232F3E?logo=AmazonAWS)
-![PyTorch](https://img.shields.io/badge/PyTorch-1.9.0-%23EE4C2C?logo=PyTorch)
-![NumPy](https://img.shields.io/badge/NumPy-1.21.1-%23013243?logo=NumPy)
-
-</div>
-
 <br>
 
 ## :mount_fuji: ​Wireframe
@@ -76,7 +53,7 @@ https://www.erdcloud.com/d/JNCBKA983wkG2D8t7
 
 <br>
 
-## :purple_heart: ​People
+## :sparkles: ​People
 
 - 전도명 : 팀장. 안드로이드
 - 김민기 : BE(Spring Boot), 자연어 처리 
@@ -84,5 +61,11 @@ https://www.erdcloud.com/d/JNCBKA983wkG2D8t7
 - 이현송 : BE(Spring Boot), 추천 시스템 개발
 - 장진우 : 자연어 처리
 
-
+## :heavy_check_mark: 진행상황
+21.10.22.금
+- 기획 초안 완성(차후 ERD 수정)
+- 각자 맡은 역할에 대한 기술 학습 중
+- 차주에 바로 배포 들어갈 예정
+- BE(Spring Boot)쪽 API 개발은 바로 진행 가능
+- 안드로이드, 자연어 처리, 추천 시스템 개발 쪽은 모두 처음이라 학습이 끝나는대로 개발 진행 예정
 
