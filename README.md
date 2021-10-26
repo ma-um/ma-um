@@ -101,4 +101,5 @@ https://www.erdcloud.com/d/JNCBKA983wkG2D8t7
   - 파이썬 환경에서 실행 성공
     - 하지만 학습을 CPU 로 진행해서 시간이 너무 오래걸림을 확인 (12시간 30분)
   - GPU 로 학습을 진행할 수 있도록 CUDA 환경 구축 예정
+  - koBERT, korBERT에 사용된 학습 데이터를 모두 사용해보는 방법을 고려
   
