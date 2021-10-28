@@ -116,3 +116,8 @@ https://www.erdcloud.com/d/JNCBKA983wkG2D8t7
 
 - FE
   - Kotlin 변수, 자료형, 메소드, 연산자, 제어흐름, 배열, Collection 학습
+
+21.10.28.목
+
+- FE
+  - 반복문, 클래스, 접근제어자, 상속, 인터페이스, 제너릭 학습
