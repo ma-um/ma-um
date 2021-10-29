@@ -126,3 +126,8 @@ https://www.erdcloud.com/d/JNCBKA983wkG2D8t7
   - CUDA 환경 구축 진행 중
     - 메모리 부족 현상 해결 하는 중에 막힘
   - 총 3개의 감정 관련 데이터셋 준비
+
+21.10.29.금
+
+- FE
+  - Android UI - Viewcomponent, Linearlayout, Relativelayout, Padding, Margin, FrameLayout, Scrollview, Imageview, Drawable
