@@ -131,3 +131,6 @@ https://www.erdcloud.com/d/JNCBKA983wkG2D8t7
 
 - FE
   - Android UI - Viewcomponent, Linearlayout, Relativelayout, Padding, Margin, FrameLayout, Scrollview, Imageview, Drawable
+- NLP
+  - 4가지 추가된 감정 데이터셋을 통한 데이터 학습
+  - 학습까지 포함된 모델 pt 파일 저장
