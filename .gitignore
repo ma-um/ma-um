@@ -256,3 +256,9 @@ dmypy.json
 cython_debug/
 
 # End of https://www.toptal.com/developers/gitignore/api/django
+
+
+## Model ##
+.pt
+maum/\353\252\250\353\215\2702.pt
+maum/\353\252\250\353\215\2702.pt
