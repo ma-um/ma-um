@@ -18,5 +18,6 @@ public class TempController {
     public String test() {
         return "다이어리";
     }
+    
 
 }
