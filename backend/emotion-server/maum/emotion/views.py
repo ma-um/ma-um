@@ -22,7 +22,6 @@ def text2emotion(request):
     bertmodel, vocab = EmotionConfig.bertmodel, EmotionConfig.vocab
     max_len = 64
     batch_size = 64
-
     tokenizer = EmotionConfig.tokenizer
     tok = nlp.data.BERTSPTokenizer(tokenizer, vocab, lower=False)
     model = BERTClassifier(bertmodel, dr_rate=0.5).to(device)

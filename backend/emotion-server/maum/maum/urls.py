@@ -19,4 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('emotion/', include('emotion.urls')),
+    path('recommendation/', include('recommendation.urls')),
+
 ]
