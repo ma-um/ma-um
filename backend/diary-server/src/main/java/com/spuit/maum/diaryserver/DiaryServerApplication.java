@@ -1,4 +1,4 @@
-package com.example.diaryserver;
+package com.spuit.maum.diaryserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

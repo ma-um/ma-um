@@ -1,4 +1,4 @@
-package com.example.musicserver;
+package com.spuit.maum.musicserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
