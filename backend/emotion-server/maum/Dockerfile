@@ -1,15 +1,7 @@
-# ./Dockerfile 
-FROM python:3
+FROM lhs7615/django:latest
+RUN pip3 install django
 WORKDIR /usr/src/app
-
-## Install packages
-COPY requirements.txt ./
-RUN pip install -r requirements.txt
-
-## Copy all src files
 COPY . .
-
-
-# gunicorn 배포 명령어
-# CMD ["gunicorn", "--bind", "허용하는 IP:열어줄 포트", "project.wsgi:application"]
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "stock.wsgi:application"]
+WORKDIR ./project
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+EXPOSE 8000
