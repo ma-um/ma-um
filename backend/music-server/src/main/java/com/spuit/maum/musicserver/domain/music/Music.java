@@ -1,7 +1,9 @@
 package com.spuit.maum.musicserver.domain.music;
 
-import com.spuit.maum.musicserver.domain.common.BaseEntity;
 import com.spuit.maum.musicserver.domain.common.DomainModel;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +21,10 @@ import lombok.ToString;
 @Builder
 @Getter
 @ToString
-public class Music extends BaseEntity {
+@Entity
+public class Music {
 
+  @Id
+  @GeneratedValue
+  String id;
 }

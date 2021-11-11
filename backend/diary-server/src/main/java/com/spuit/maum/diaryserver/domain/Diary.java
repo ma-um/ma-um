@@ -3,6 +3,7 @@ package com.spuit.maum.diaryserver.domain;
 import com.spuit.maum.diaryserver.domain.common.BaseEntity;
 import com.spuit.maum.diaryserver.domain.common.DomainModel;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,9 +19,11 @@ import lombok.ToString;
 
 @DomainModel
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Getter
 @ToString
+@Entity
 public class Diary extends BaseEntity {
 
   @Column(nullable = false)
