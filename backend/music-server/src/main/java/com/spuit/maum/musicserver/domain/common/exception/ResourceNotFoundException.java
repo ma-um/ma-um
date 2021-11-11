@@ -30,6 +30,6 @@ public class ResourceNotFoundException extends RuntimeException {
     super(String.format("%s not found with %s : %s", resourceName, resourceType, resourceValue));
     this.resourceType = resourceType;
     this.resourceName = resourceName;
-    this.resourceValue = resourceName;
+    this.resourceValue = resourceValue;
   }
 }
