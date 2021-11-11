@@ -1,39 +1,32 @@
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .serializers import TextSerializer
+from .serializers import DiarySerializer
 import numpy as np
 import pandas as pd
-from .models import Song
+from .models import Music
 import requests
 
 @api_view(['GET', 'POST'])
 def emotion_recommendation(request):
-    url = 'http://127.0.0.1:8000/emotion/text2emotion/'
+    url = 'http://127.0.0.1:8000/emotion/diary2emotion/'
     response = requests.get(url)
-    # input
-    # 일기로부터 가져온 감정 리스트
-    # print(response)
-    # params = {'text': 'diary', 'result': ''}
-    # tmp = response.get(url, params=params)
-    # print(tmp)
-    emotion1 = response.json()['result']
-    arr = list(emotion1.split(' '))
-    arr[0] = arr[0][1::]
-    emotion1 = []
-    for i in arr:
-        if i != '' and i[-3::] != '\n' and i != arr[-1]:
-            emotion1.append(float(i))
-    # print(result)
-    # emotion =([1,2,3,4,5,6,7,8,9,10,11])
+    # input 일기로부터 가져온 감정 리스트
+    emotion = response.json()['result'][1:-2]
+    emotion = list(map(int, emotion.split('. ')))
+    # emotion = [80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     # arr 은 음악 감정 데이터
-    songs = get_list_or_404(Song)
+    musics = get_list_or_404(Music)
     tmp = []
-    for song in songs:
-        tmp.append(list(map(float, [song.fear, song.surprise, song.anger, song.sadness, song.neutrality, song.happiness, song.disgust, song.pleasure, song.embarrassment, song.unrest, song.bruise])))
+    idx1 = 0
+    for music in musics:
+        tmp.append(list(map(float, [music.fear, music.surprise, music.anger, music.sadness, music.neutrality, music.happiness, music.disgust, music.pleasure, music.embarrassment, music.unrest, music.bruise])))
+        for idx in range(len(tmp[idx1])):
+            tmp[idx1][idx] = int((float(tmp[idx1][idx])+5)/13 * 100)
+        idx1 += 1
+    
     arr = np.array(tmp)
-
-    result= np.subtract(arr,emotion1)
+    result= np.subtract(arr, emotion)
     result = np.abs(result)
     sum = result.sum(axis=1)
     sum = sum,np.arange(len(sum))
@@ -44,10 +37,12 @@ def emotion_recommendation(request):
     result = sum.number
     result = result.to_numpy()
 
-    text = {
-        'text' : f'{emotion1}',
-        'result': f'{result}'
+    diary = {
+        'text' : f'{emotion}',
+        'music1': f'{musics[result[0]].name, musics[result[0]].singer, musics[result[0]].jacket_url}',
+        'music2': f'{musics[result[1]].name, musics[result[1]].singer, musics[result[1]].jacket_url}',
+        'music3': f'{musics[result[2]].name, musics[result[2]].singer, musics[result[2]].jacket_url}'
     }
     
-    serializer = TextSerializer(text)
+    serializer = DiarySerializer(diary)
     return Response(serializer.data)

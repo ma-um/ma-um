@@ -12,11 +12,13 @@ import numpy as np
 
 # Create your models here.
 
-class Text(models.Model):
+class Diary(models.Model):
     text = models.TextField()
-    result = models.TextField()
+    music1 = models.TextField()
+    music2 = models.TextField()
+    music3 = models.TextField()
 
-class Song(models.Model):
+class Music(models.Model):
     name = models.CharField(max_length=20)
     singer = models.CharField(max_length=40)
     jacket_url = models.TextField()

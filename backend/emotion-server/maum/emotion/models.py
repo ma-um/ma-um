@@ -13,7 +13,7 @@ import numpy as np
 # Create your models here.
 
 class Text(models.Model):
-    text = models.TextField()
+    diary = models.TextField()
     result = models.TextField()
 
 class BERTDataset(Dataset):
@@ -35,7 +35,7 @@ class BERTClassifier(nn.Module):
     def __init__(self,
                  bert,
                  hidden_size = 768,
-                 # 클래스 수 조정
+                 # 클래스 수 (감정 갯수) 조정
                  num_classes=11,
                  dr_rate=None,
                  params=None):

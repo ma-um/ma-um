@@ -4,5 +4,5 @@ from . import views
 app_name = 'emotion'
 
 urlpatterns = [
-    path('text2emotion/', views.text2emotion, name='text2emotion'),
+    path('diary2emotion/', views.diary2emotion, name='diary2emotion'),
 ]
