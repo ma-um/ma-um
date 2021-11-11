@@ -1,11 +1,13 @@
-package com.spuit.maum.diaryserver.infrastructure.domain.jpa;
+package com.spuit.maum.authserver.domain.common;
 
-import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
+
+import java.io.Serializable;
+import java.security.MessageDigest;
 
 
 /**

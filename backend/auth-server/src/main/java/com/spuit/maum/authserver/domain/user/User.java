@@ -1,5 +1,6 @@
 package com.spuit.maum.authserver.domain.user;
 
+import com.spuit.maum.authserver.domain.common.BaseEntity;
 import com.spuit.maum.authserver.domain.common.DomainModel;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
@@ -21,8 +22,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-public class User {
-  String id;
+public class User extends BaseEntity {
   String oauthId;
-  LocalDateTime registrationDate;
 }

@@ -1,4 +1,4 @@
-package com.spuit.maum.diaryserver.infrastructure.domain.jpa;
+package com.spuit.maum.musicserver.domain.common;
 
 import java.time.LocalDateTime;
 import javax.persistence.EntityListeners;
@@ -23,12 +23,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
 
-  @GenericGenerator(name = "HashIdGenerator", strategy = "com.ggg.logg.domain.common"
+  @GenericGenerator(name = "HashIdGenerator", strategy = "com.spuit.maum.musicserver.domain.common"
       + ".HashIdGenerator")
   @GeneratedValue(generator = "HashIdGenerator")
   @Id
   protected String id;
-
-  @CreatedDate
-  protected LocalDateTime registrationDate;
 }

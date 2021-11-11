@@ -1,5 +1,6 @@
 package com.spuit.maum.musicserver.domain.music;
 
+import com.spuit.maum.musicserver.domain.common.BaseEntity;
 import com.spuit.maum.musicserver.domain.common.DomainModel;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,10 +16,9 @@ import lombok.ToString;
 
 @DomainModel
 @NoArgsConstructor
-
 @Builder
 @Getter
 @ToString
-public class Music {
+public class Music extends BaseEntity {
 
 }
