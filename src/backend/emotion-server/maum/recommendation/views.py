@@ -13,10 +13,6 @@ def emotion_recommendation(request):
     response = requests.get(url)
     # input
     # 일기로부터 가져온 감정 리스트
-    # print(response)
-    # params = {'text': 'diary', 'result': ''}
-    # tmp = response.get(url, params=params)
-    # print(tmp)
     emotion1 = response.json()['result']
     arr = list(emotion1.split(' '))
     arr[0] = arr[0][1::]
@@ -24,8 +20,7 @@ def emotion_recommendation(request):
     for i in arr:
         if i != '' and i[-3::] != '\n' and i != arr[-1]:
             emotion1.append(float(i))
-    # print(result)
-    # emotion =([1,2,3,4,5,6,7,8,9,10,11])
+
     # arr 은 음악 감정 데이터
     songs = get_list_or_404(Song)
     tmp = []
@@ -33,7 +28,7 @@ def emotion_recommendation(request):
         tmp.append(list(map(float, [song.fear, song.surprise, song.anger, song.sadness, song.neutrality, song.happiness, song.disgust, song.pleasure, song.embarrassment, song.unrest, song.bruise])))
     arr = np.array(tmp)
 
-    result= np.subtract(arr,emotion1)
+    result= np.subtract(arr, emotion1)
     result = np.abs(result)
     sum = result.sum(axis=1)
     sum = sum,np.arange(len(sum))
