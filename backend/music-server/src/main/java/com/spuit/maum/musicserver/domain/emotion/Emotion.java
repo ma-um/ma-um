@@ -1,8 +1,7 @@
-package com.spuit.maum.musicserver.domain.music;
+package com.spuit.maum.musicserver.domain.emotion;
 
 import com.spuit.maum.musicserver.domain.common.DomainModel;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Music 애그리거트 루트 도메인.
+ * Emotion 애그리거트 루트 도메인.
  *
  * @author cherrytomato1
  * @version 1.0.0
@@ -24,11 +23,10 @@ import lombok.ToString;
 @Getter
 @ToString
 @Entity
-public class Music {
-
+public class Emotion {
   @Id
-  @GeneratedValue
-  Long id;
+  String id;
+  Integer type;
 
   String fear;
   String surprise;

@@ -1,4 +1,4 @@
-package com.spuit.maum.diaryserver.domain;
+package com.spuit.maum.diaryserver.domain.diary;
 
 import com.spuit.maum.diaryserver.domain.common.BaseEntity;
 import com.spuit.maum.diaryserver.domain.common.DomainModel;

@@ -1,4 +1,4 @@
-package com.spuit.maum.diaryserver.domain;
+package com.spuit.maum.diaryserver.domain.tag;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author cherrytomato1
  * @version 1.0.0
  */
-public interface DiaryRepository extends JpaRepository<Diary, String> {
+public interface TagRepository extends JpaRepository<Tag, String> {
 
 }
