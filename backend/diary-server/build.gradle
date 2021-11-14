@@ -1,3 +1,9 @@
+buildscript {
+    ext {
+        queryDslVersion = "4.4.0"
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '2.5.6'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
@@ -29,6 +35,13 @@ dependencies {
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    //QueryDSL
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    annotationProcessor(
+            "javax.persistence:javax.persistence-api",
+            "javax.annotation:javax.annotation-api",
+            "com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
 }
 
 jacocoTestReport {
@@ -37,9 +50,28 @@ jacocoTestReport {
         xml.enabled false
         csv.enabled false
     }
+
+    def Qdomains = []
+    for(qPattern in "**/QA" .. "**/QZ"){
+        Qdomains.add(qPattern+"*")
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it,
+                    exclude: [] + Qdomains)
+        }))
+    }
+
+    finalizedBy 'jacocoTestCoverageVerification'
 }
 
 jacocoTestCoverageVerification {
+    // Q + 대문자로 시작하는 클래스 exclude (QueryDSL q 클래스)
+    def Qdomains = []
+    for (qPattern in "*.QA".."*.QZ") {
+        Qdomains.add(qPattern + "*")
+    }
     violationRules {
         rule {
             element = 'CLASS'
@@ -49,6 +81,17 @@ jacocoTestCoverageVerification {
                 value = 'COVEREDRATIO'
                 minimum = 0.80
             }
+
+            excludes = [] + Qdomains
+        }
+    }
+}
+
+//q클래스 디렉토리 위치
+sourceSets {
+    main {
+        java {
+            srcDirs = ["$projectDir/src/main/java", "$projectDir/build/generated"]
         }
     }
 }
