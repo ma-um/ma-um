@@ -29,6 +29,10 @@ public class Music {
   @Id
   @GeneratedValue
   Long id;
+  String name;
+  String singer;
+  String jacketUrl;
+  String lyric;
 
   String fear;
   String surprise;
