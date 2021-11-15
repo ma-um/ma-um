@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/auth-server.iml" filepath="$PROJECT_DIR$/.idea/modules/auth-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/auth-server.main.iml" filepath="$PROJECT_DIR$/.idea/modules/auth-server.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/auth-server.test.iml" filepath="$PROJECT_DIR$/.idea/modules/auth-server.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/backend.iml" filepath="$PROJECT_DIR$/.idea/backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/diary-server.iml" filepath="$PROJECT_DIR$/.idea/modules/diary-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/diary-server.main.iml" filepath="$PROJECT_DIR$/.idea/modules/diary-server.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/diary-server.test.iml" filepath="$PROJECT_DIR$/.idea/modules/diary-server.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/music-server.iml" filepath="$PROJECT_DIR$/.idea/modules/music-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/music-server.main.iml" filepath="$PROJECT_DIR$/.idea/modules/music-server.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/music-server.test.iml" filepath="$PROJECT_DIR$/.idea/modules/music-server.test.iml" />
     </modules>
   </component>
 </project>
