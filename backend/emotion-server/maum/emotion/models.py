@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-
+from recommendation.models import Diary, Music
 import torch
 from torch import nn
 import torch.nn.functional as F
@@ -60,3 +60,17 @@ class BERTClassifier(nn.Module):
         return self.classifier(out)
 
 
+class Emotion(models.Model):
+    emotion_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=20)
+    emoji = models.TextField()
+    class Meta:
+        db_table = u'emotion'
+
+class DiaryEmotion(models.Model):
+    diary_emotion_id = models.AutoField(primary_key=True)
+    diary_id = models.ForeignKey(Diary, on_delete=models.CASCADE)
+    emotion_id = models.ForeignKey(Emotion, on_delete=models.CASCADE)
+    value = models.CharField(max_length=20)
+    class Meta:
+        db_table = u'diary_emotion'

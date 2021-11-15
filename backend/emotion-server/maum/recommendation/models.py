@@ -1,27 +1,15 @@
 from django.db import models
 from django.conf import settings
-
-import torch
-from torch import nn
-import torch.nn.functional as F
-import torch.optim as optim
-from torch.utils.data import Dataset, DataLoader
-import gluonnlp as nlp
-import numpy as np
-
+from django.db.models import fields
+from django.db.models.deletion import CASCADE
 
 # Create your models here.
 
-class Diary(models.Model):
-    text = models.TextField()
-    music1 = models.TextField()
-    music2 = models.TextField()
-    music3 = models.TextField()
-
 class Music(models.Model):
-    name = models.CharField(max_length=20)
-    singer = models.CharField(max_length=40)
+    name = models.CharField(max_length=100)
+    singer = models.CharField(max_length=100)
     jacket_url = models.TextField()
+    lyric = models.TextField()
     fear = models.FloatField()
     surprise = models.FloatField()
     anger = models.FloatField()
@@ -34,4 +22,21 @@ class Music(models.Model):
     unrest = models.FloatField()
     bruise = models.FloatField()
     class Meta:
-        managed = False
+        db_table = u'music'
+        # fields = ('id')
+
+
+class Diary(models.Model):
+    user_id = models.CharField(max_length=20)
+    title = models.TextField()
+    content = models.TextField()
+    registeration_time = models.DateTimeField(auto_now=True)
+    class Meta:
+        db_table = u'diary'
+
+    
+class Diary_Music(models.Model):
+    music = models.ForeignKey(Music, on_delete=CASCADE)
+    diary = models.ForeignKey(Diary, on_delete=CASCADE)
+    class Meta:
+        db_table = u'diary_music'
