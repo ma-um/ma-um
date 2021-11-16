@@ -6,6 +6,7 @@ import static org.mockito.BDDMockito.given;
 import com.spuit.maum.authserver.domain.common.exception.ResourceNotFoundException;
 import com.spuit.maum.authserver.domain.user.User;
 import com.spuit.maum.authserver.domain.user.UserRepository;
+import com.spuit.maum.authserver.domain.user.exception.RegisterException;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -32,7 +33,7 @@ class UserServiceTest {
 
   @BeforeEach
   public void setUp() {
-    this.userService = new UserServiceImpl();
+    this.userService = new UserServiceImpl(userRepository);
   }
 
 
@@ -61,16 +62,19 @@ class UserServiceTest {
   @DisplayName("OAuthId로 새로운 사용자를 등록한다")
   public void registerUserServiceTest() {
     //given
+    final String DUPLICATE_ID = "d";
+
     User user = User.builder().oauthId(TEST_OAUTH_ID).build();
+    User duplicatedUser = User.builder().oauthId(DUPLICATE_ID).build();
 
     given(this.userRepository.save(user)).willReturn(user);
+    given(this.userRepository.save(duplicatedUser)).willThrow(new RuntimeException());
 
     //when
     User resultUser = userService.registerUserByOauthId(TEST_OAUTH_ID);
 
     //then
     assertEquals(user, resultUser);
+    assertThrows(RegisterException.class, () -> userService.registerUserByOauthId(DUPLICATE_ID));
   }
-}
-
 }

@@ -24,12 +24,11 @@ class UserRepositoryTest {
 
   private final Logger LOGGER = LoggerFactory.getLogger(UserRepositoryTest.class);
 
-  private final String TEST_OAUTH_ID = "11111111";
-
   @Test
   @DisplayName("User 엔티티를 UserRepository로 저장한다")
   public void saveUserTest() {
     //given
+    final String TEST_OAUTH_ID = "11111111t1";
     User user = User.builder().oauthId(TEST_OAUTH_ID).build();
 
     LOGGER.info("test user - {}", user);
@@ -47,6 +46,7 @@ class UserRepositoryTest {
   @DisplayName("OauthId로 User를 불러온다.")
   public void loadUserByOauthId() {
     //given
+    final String TEST_OAUTH_ID = "111111111t2";
     String invalidOauthId = "1231";
     User savedUser = userRepository.save(User.builder().oauthId(TEST_OAUTH_ID).build());
     //when
