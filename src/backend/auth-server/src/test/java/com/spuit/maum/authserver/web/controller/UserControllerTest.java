@@ -99,7 +99,7 @@ class UserControllerTest {
     final String INVALID_OAUTH_ID = "123f";
     final String TEST_USER_ID = "M123";
 
-    User user = User.builder().oauthId(TEST_OAUTH_ID).build();
+    User user = User.builder().oauthId(TEST_OAUTH_ID).id(TEST_USER_ID).build();
 
     given(this.userService.findUserByOauthId(TEST_OAUTH_ID)).willReturn(user);
     given(this.userService.findUserByOauthId(INVALID_OAUTH_ID))

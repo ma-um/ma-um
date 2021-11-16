@@ -26,8 +26,8 @@ public class AuthenticateAspect {
   /**
    *
    * @param joinPoint AOP 조인포인트
-   * @return
-   * @throws Throwable
+   * @return 원래 메서드의 반환값 반환
+   * @throws Throwable proceed 과정에서 발생하는 throwable.
    */
   @Around("execution(* *(.., @AuthenticationParameter (*), ..))")
   public Object convertUser(ProceedingJoinPoint joinPoint) throws Throwable {

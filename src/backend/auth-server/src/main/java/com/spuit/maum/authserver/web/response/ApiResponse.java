@@ -3,6 +3,7 @@ package com.spuit.maum.authserver.web.response;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 
 /**
@@ -14,15 +15,15 @@ import org.springframework.http.HttpStatus;
  * @author cherrytomato1
  * @version 1.0.1
  */
-@NoArgsConstructor
+
 @AllArgsConstructor
 @Getter
 public class ApiResponse<T> {
 
-  private HttpStatus httpStatus;
-  private int statusCode;
-  private String message;
-  private T data;
+  private final HttpStatus statusCode;
+  private final int statusCodeValue;
+  private final String message;
+  private final T data;
 
   /**
    * @param httpStatus 응답 코드
@@ -37,5 +38,9 @@ public class ApiResponse<T> {
 
   public static <T> ApiResponse<T> defaultOk(T data) {
     return new ApiResponse<>(HttpStatus.OK, 200, "success", data);
+  }
+
+  public HttpStatus getValue() {
+    return statusCode;
   }
 }

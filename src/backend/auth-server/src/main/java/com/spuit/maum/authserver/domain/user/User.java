@@ -11,20 +11,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 /**
  * User 애그리거트 루트 도메인.
  *
- * equals 재정의
+ * superbuilder 추가
  * @author cherrytomato1
- * @version 1.0.2
+ * @version 1.0.3
  */
 
 @DomainModel
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@SuperBuilder
 @Entity
 @ToString(callSuper = true)
 public class User extends BaseEntity {
