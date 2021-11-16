@@ -1,5 +1,6 @@
 package com.spuit.maum.authserver.application.user;
 
+import com.spuit.maum.authserver.domain.user.User;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,4 +12,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
+  @Override
+  public User findUserByOauthId(String oauthId) {
+    return null;
+  }
+
+  @Override
+  public User registerUserByOauthId(String oauthId) {
+    return null;
+  }
 }
