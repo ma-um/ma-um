@@ -36,10 +36,11 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException.Unauthorized;
 
 /**
- * UserController 슬라이스 테스트
+ * UserController 슬라이스 테스트.
  *
+ * AuthenticationAspect Test 추가.
  * @author cherrytomato1
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 
@@ -58,7 +59,7 @@ class UserControllerTest {
 
   @Test
   @DisplayName("이미 존재하는 회원일 경우 200, 없는 회원일 경우 가입 후 201을 응답한다.")
-  void validateUserOrRegisterTest() throws Exception {
+  public void validateUserOrRegisterTest() throws Exception {
     //given
     final String TEST_OAUTH_ID = "123t";
     final String INVALID_OAUTH_ID = "123f";
@@ -92,8 +93,43 @@ class UserControllerTest {
   }
 
   @Test
+  @DisplayName("Authorization 헤더가 비었거나 prefix가 token이 아닐경우 경우, 400을 반환한다")
+  public void authenticationAspectTest() throws Exception {
+    //given
+    final String INVALID_HEADER = "auth";
+    final String INVALID_PREFIX = "tokk";
+    final String PREFIX = "token ";
+    final String TEST_OAUTH_ID = "1111";
+
+    IllegalArgumentException invalidPrefixException = new IllegalArgumentException(
+        "Authorization value must start with [ " + PREFIX + " ]");
+
+    final String uri = "/api/v1/user/load-user";
+
+    //when
+    ApiResponse<?> invalidPrefixResponse = ApiResponse.of(HttpStatus.BAD_REQUEST,
+        invalidPrefixException.getMessage(), null);
+    String invalidPrefixResponseString = objectMapper.writeValueAsString(invalidPrefixResponse);
+
+    MultiValueMap<String, String> invalidHeaders = new LinkedMultiValueMap<>();
+    invalidHeaders.add(INVALID_HEADER, "token " + TEST_OAUTH_ID);
+
+    MultiValueMap<String, String> invalidPrefixHeaders = new LinkedMultiValueMap<>();
+    invalidPrefixHeaders.add("Authorization", INVALID_PREFIX + TEST_OAUTH_ID);
+
+    //then
+    mockMvcGetAssert(uri, new LinkedMultiValueMap<>(), invalidHeaders, "",
+        status().isBadRequest());
+    mockMvcGetAssert(uri, new LinkedMultiValueMap<>(), invalidPrefixHeaders,
+        invalidPrefixResponseString,
+        status().isBadRequest());
+
+  }
+
+
+  @Test
   @DisplayName("존재하는 회원일 경우 200과 Id를, 없는 회원일 경우 404를 응답한다.")
-  void authenticateAndGetUserIdTest() throws Exception {
+  public void authenticateAndGetUserIdTest() throws Exception {
     //given
     final String TEST_OAUTH_ID = "123t";
     final String INVALID_OAUTH_ID = "123f";

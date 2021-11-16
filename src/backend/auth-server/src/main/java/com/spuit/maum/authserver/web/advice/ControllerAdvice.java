@@ -21,12 +21,6 @@ import springfox.documentation.service.ApiInfo;
 @RestControllerAdvice
 public class ControllerAdvice {
 
-  @ExceptionHandler(value = ResourceNotFoundException.class)
-  @ResponseStatus(value = HttpStatus.NOT_FOUND)
-  public ApiResponse<?> ResourceNotFoundExceptionHandler(ResourceNotFoundException ex) {
-    return ApiResponse.of(HttpStatus.NOT_FOUND, ex.getMessage(), null);
-  }
-
   @ExceptionHandler(value = UnauthorizedException.class)
   @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
   public ApiResponse<?> UnauthorizedExceptionHandler(UnauthorizedException ex) {

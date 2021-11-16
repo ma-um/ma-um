@@ -8,19 +8,21 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  * UserRepository의 테스트
  *
+ * DataRepositoryTest로 변경
  * @author cherrytomato1
- * @version 1.0.0
+ * @version 1.0.1
  */
-@SpringBootTest
+@DataJpaTest
 class UserRepositoryTest {
 
   @Autowired
-  UserRepository userRepository;
+  private UserRepository userRepository;
 
   private final Logger LOGGER = LoggerFactory.getLogger(UserRepositoryTest.class);
 

@@ -47,7 +47,7 @@ public class AuthenticateAspect {
       throw new IllegalArgumentException("Authorization never be empty!");
     }
     if (!authorization.startsWith(TOKEN_PREFIX)) {
-      throw new IllegalArgumentException("Authorization value must start with " + TOKEN_PREFIX);
+      throw new IllegalArgumentException("Authorization value must start with [ " + TOKEN_PREFIX + " ]");
     }
 
     String token = authorization.replaceAll(TOKEN_PREFIX, "");
