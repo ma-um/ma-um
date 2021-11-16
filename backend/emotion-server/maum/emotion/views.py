@@ -14,7 +14,6 @@ def diary2emotion(request, diary_id):
     diary = get_object_or_404(Diary, pk = diary_id)
     input_data = diary.content
 
-
     # # 실제로 실행할 때 주석을 풀 것
     # url = 'http://127.0.0.1:8000/diary2emotion'
     # response = requests.post(url)
@@ -27,7 +26,7 @@ def diary2emotion(request, diary_id):
     tokenizer = EmotionConfig.tokenizer
     tok = nlp.data.BERTSPTokenizer(tokenizer, vocab, lower=False)
     model = BERTClassifier(bertmodel, dr_rate=0.5).to(device)
-    model.load_state_dict(torch.load('./학습 데이터 모델1.pt', map_location=device))
+    model.load_state_dict(torch.load('./model.pt', map_location=device))
 
     def predict(predict_sentence):
         global logits
@@ -57,9 +56,9 @@ def diary2emotion(request, diary_id):
         logits[idx] = int((float(logits[idx])+5)/13 * 100)
     
     data = {
-        'text' : input_data,
+        'content' : input_data,
         'result': f'{logits}'
     }
     
-    return JsonResponse({'status': '임의로 200', 'data': data}, json_dumps_params={'ensure_ascii': False}, status=200) 
+    return JsonResponse({'status': '200', 'data': data}, json_dumps_params={'ensure_ascii': False}, status=200) 
     # return JsonResponse({'status': response.status_code ,'data': data}, safe=True, json_dumps_params={'ensure_ascii': False}, status=200) 
