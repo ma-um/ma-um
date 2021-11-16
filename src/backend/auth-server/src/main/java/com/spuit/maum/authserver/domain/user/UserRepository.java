@@ -1,5 +1,6 @@
 package com.spuit.maum.authserver.domain.user;
 
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -9,5 +10,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 1.0.0
  */
 public interface UserRepository extends JpaRepository<User, String> {
-
+  Optional<User> findByOauthId(String oauthId);
 }

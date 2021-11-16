@@ -22,7 +22,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Getter
-@ToString
+@ToString(callSuper = true)
 @Entity
 public class Diary extends BaseEntity {
 
