@@ -15,7 +15,7 @@ public class RegisterException extends RuntimeException {
   private final Object exception;
 
   public RegisterException(Throwable exception) {
-    super(String.format("register user exception cause by - {}", exception));
+    super(String.format("register user exception cause by %s", exception));
     this.exception = exception;
   }
 }

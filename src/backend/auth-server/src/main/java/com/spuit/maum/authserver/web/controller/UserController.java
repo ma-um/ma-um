@@ -1,6 +1,7 @@
 package com.spuit.maum.authserver.web.controller;
 
 import com.spuit.maum.authserver.application.user.UserService;
+import com.spuit.maum.authserver.web.aspect.AuthenticationParameter;
 import com.spuit.maum.authserver.web.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,14 +27,17 @@ public class UserController {
   private final UserService userService;
 
   @GetMapping("/load-user")
+
   public ApiResponse<?> validateUserOrRegister(
-      @ApiIgnore @RequestHeader("Authorization") String token) {
+      @RequestHeader("Authorization") @AuthenticationParameter @ApiIgnore String token) {
+
+
     return ApiResponse.defaultOk(token);
   }
 
   @GetMapping("/")
   public ApiResponse<?> authenticateTokenAndGetUserId(
-      @ApiIgnore @RequestHeader("Authorization") String token) {
+      @RequestHeader("Authorization") @AuthenticationParameter @ApiIgnore String token) {
     return null;
   }
 
