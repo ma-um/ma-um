@@ -1,13 +1,12 @@
 from django.shortcuts import get_object_or_404
 from recommendation.models import Diary
 from rest_framework.decorators import api_view
-from django.views.decorators.http import require_GET, require_POST, require_http_methods
 from django.http import JsonResponse
 import torch
 import gluonnlp as nlp
 from .apps import EmotionConfig, BERTClassifier, BERTDataset
-import requests
-@api_view(['GET', 'POST'])
+
+@api_view(['POST'])
 def diary2emotion(request, diary_id):
 
     # 실제로 실행할 때에는 주석처리 할 것

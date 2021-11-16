@@ -10,6 +10,7 @@ import requests
 def emotion_recommendation(request):
     url = 'http://127.0.0.1:8000/emotion/1/diary2emotion/'
     response = requests.get(url)
+
     # input 일기로부터 가져온 감정 리스트
     emotion = response.json()['data']['result'][1:-2]
     emotion = list(map(int, emotion.split('. ')))
@@ -38,12 +39,12 @@ def emotion_recommendation(request):
 
     data = {
 		"musicIdList" :[
-            {"id": int(musics[result[0]].pk) },
-            {"id": int(musics[result[1]].pk) },
-            {"id": int(musics[result[2]].pk) },
-            {"id": int(musics[result[3]].pk) },
-            {"id": int(musics[result[4]].pk) },
-            {"id": int(musics[result[5]].pk) }
+            {"id": int(musics[result[0]].pk)},
+            {"id": int(musics[result[1]].pk)},
+            {"id": int(musics[result[2]].pk)},
+            {"id": int(musics[result[3]].pk)},
+            {"id": int(musics[result[4]].pk)},
+            {"id": int(musics[result[5]].pk)}
             ]
         }
 
