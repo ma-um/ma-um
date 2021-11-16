@@ -1,20 +1,20 @@
-from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
-from rest_framework.response import Response
+from django.shortcuts import get_list_or_404
 from rest_framework.decorators import api_view
-from .serializers import DiarySerializer
 import numpy as np
 import pandas as pd
 from .models import Music
+from django.http import JsonResponse
 import requests
 
 @api_view(['GET', 'POST'])
 def emotion_recommendation(request):
-    url = 'http://127.0.0.1:8000/emotion/diary2emotion/'
+    url = 'http://127.0.0.1:8000/emotion/1/diary2emotion/'
     response = requests.get(url)
+
     # input 일기로부터 가져온 감정 리스트
-    emotion = response.json()['result'][1:-2]
+    emotion = response.json()['data']['result'][1:-2]
     emotion = list(map(int, emotion.split('. ')))
-    # emotion = [80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
     # arr 은 음악 감정 데이터
     musics = get_list_or_404(Music)
     tmp = []
@@ -24,7 +24,7 @@ def emotion_recommendation(request):
         for idx in range(len(tmp[idx1])):
             tmp[idx1][idx] = int((float(tmp[idx1][idx])+5)/13 * 100)
         idx1 += 1
-    
+
     arr = np.array(tmp)
     result= np.subtract(arr, emotion)
     result = np.abs(result)
@@ -37,12 +37,15 @@ def emotion_recommendation(request):
     result = sum.number
     result = result.to_numpy()
 
-    diary = {
-        'text' : f'{emotion}',
-        'music1': f'{musics[result[0]].name, musics[result[0]].singer, musics[result[0]].jacket_url}',
-        'music2': f'{musics[result[1]].name, musics[result[1]].singer, musics[result[1]].jacket_url}',
-        'music3': f'{musics[result[2]].name, musics[result[2]].singer, musics[result[2]].jacket_url}'
-    }
-    
-    serializer = DiarySerializer(diary)
-    return Response(serializer.data)
+    data = {
+		"musicIdList" :[
+            {"id": int(musics[result[0]].pk)},
+            {"id": int(musics[result[1]].pk)},
+            {"id": int(musics[result[2]].pk)},
+            {"id": int(musics[result[3]].pk)},
+            {"id": int(musics[result[4]].pk)},
+            {"id": int(musics[result[5]].pk)}
+            ]
+        }
+
+    return JsonResponse({'status': response.status_code ,'data': data}, json_dumps_params={'ensure_ascii': False}, status=200)

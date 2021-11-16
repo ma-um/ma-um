@@ -51,6 +51,8 @@ conda-repo-cli @ file:///tmp/build/80754af9/conda-repo-cli_1620168426516/work
 conda-token @ file:///tmp/build/80754af9/conda-token_1620076980546/work
 conda-verify==3.4.2
 contextlib2==0.6.0.post1
+coreapi==2.3.3
+coreschema==0.0.4
 cryptography @ file:///C:/ci/cryptography_1616769344312/work
 cycler==0.10.0
 Cython @ file:///C:/ci/cython_1618435363327/work
@@ -63,6 +65,7 @@ distributed @ file:///C:/ci/distributed_1617384289923/work
 Django==3.2.9
 djangorestframework==3.12.4
 docutils==0.15.2
+drf-yasg==1.20.0
 entrypoints==0.3
 et-xmlfile==1.0.1
 fastcache==1.1.0
@@ -90,6 +93,7 @@ imagecodecs @ file:///C:/ci/imagecodecs_1617996768495/work
 imageio @ file:///tmp/build/80754af9/imageio_1617700267927/work
 imagesize @ file:///home/ktietz/src/ci/imagesize_1611921604382/work
 importlib-metadata @ file:///C:/ci/importlib-metadata_1617877484576/work
+inflection==0.5.1
 iniconfig @ file:///home/linux1/recipes/ci/iniconfig_1610983019677/work
 intervaltree @ file:///tmp/build/80754af9/intervaltree_1598376443606/work
 ipykernel @ file:///C:/ci/ipykernel_1596190155316/work/dist/ipykernel-5.3.4-py3-none-any.whl
@@ -98,6 +102,7 @@ ipython-genutils @ file:///tmp/build/80754af9/ipython_genutils_1606773439826/wor
 ipywidgets @ file:///tmp/build/80754af9/ipywidgets_1610481889018/work
 isort @ file:///tmp/build/80754af9/isort_1616355431277/work
 itsdangerous @ file:///home/ktietz/src/ci/itsdangerous_1611932585308/work
+itypes==1.2.0
 jdcal==1.4.1
 jedi @ file:///C:/ci/jedi_1606914528444/work
 Jinja2 @ file:///tmp/build/80754af9/jinja2_1612213139570/work
@@ -227,6 +232,8 @@ rope @ file:///tmp/build/80754af9/rope_1602264064449/work
 rsa==4.7.2
 Rtree @ file:///C:/ci/rtree_1618421009405/work
 ruamel-yaml-conda @ file:///C:/ci/ruamel_yaml_1616016967756/work
+ruamel.yaml==0.17.17
+ruamel.yaml.clib==0.2.6
 s3transfer==0.4.2
 sacremoses==0.0.46
 scikit-image==0.18.1
@@ -288,7 +295,8 @@ typed-ast @ file:///C:/ci/typed-ast_1610466535590/work
 typing-extensions @ file:///home/ktietz/src/ci_mi/typing_extensions_1612808209620/work
 ujson @ file:///C:/ci/ujson_1611241570789/work
 unicodecsv==0.14.1
-urllib3==1.26.7
+uritemplate==4.1.1
+urllib3==1.22
 watchdog @ file:///C:/ci/watchdog_1612471251191/work
 wcwidth @ file:///tmp/build/80754af9/wcwidth_1593447189090/work
 webencodings==0.5.1
@@ -309,3 +317,4 @@ zict==2.0.0
 zipp @ file:///tmp/build/80754af9/zipp_1615904174917/work
 zope.event==4.5.0
 zope.interface @ file:///C:/ci/zope.interface_1616357322857/work
+

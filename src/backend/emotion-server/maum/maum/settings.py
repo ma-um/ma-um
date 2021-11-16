@@ -33,7 +33,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'emotion',
     'recommendation',
-    'rest_framework',
+    'drf_yasg', #drf_yasg 
+    'rest_framework', #djangorestframework
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -82,11 +83,11 @@ DATABASES = {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'emotion',  #데이터베이스 이름
+        'NAME': 'test_database',  #데이터베이스 이름
         'USER': 'root', #root
-        'PASSWORD': 'root', #1234
-        'HOST': 'localhost', #공백으로 냅두면 default localhost
-        'PORT': '3306' #공백으로 냅두면 default 3306
+        'PASSWORD': '1234', #1234
+        'HOST': '3.34.42.249', #공백으로 냅두면 default localhost
+        'PORT': '33066' #공백으로 냅두면 default 3306
         # 'HOST': 'db-adress', #공백으로 냅두면 default localhost
         # 'PORT': 'port-number' #공백으로 냅두면 default 3306
     }
