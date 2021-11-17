@@ -28,15 +28,14 @@
 
 ### Frontend
 
-- Vue.js  2.6.11
-  - 네이티브 앱과 같이 뛰어난 사용성을 제공하는 SPA를 구현하고자 Vue.js를 채택하였습니다.
-- Sass (Scss) 4.11.1
-  - 스타일링 측면에서의 개발 생산성을 높이기 위해 Sass를 채택하였습니다.
+- Android 11 (Red Velvet Cake)
+  - 네이티브 앱과 같이 뛰어난 범용성을 제공하는 플렛폼을 구현하고자 Android를 채택하였습니다.
+  
 
 ### Backend
 
 - Spring-Boot 2.3.9
-- mysql 8.0.22
+- MariaDB 10.5.9
 
 
 
