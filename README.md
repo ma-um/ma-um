@@ -6,11 +6,10 @@
 
 |NAME|ROLE|EMAIL|
 |------|---|---|
-|👑김호영|Distribution & Front-End|junghoon401@naver.com|
-|🧒박세령|Backend & Front-End|sr5871@gmail.com|
-|🧑안상훈|AI & Front-End|ahnsang9@gmail.com|
-|🧑김상재|Frontend Tech Leader|sangjea5@naver.com|
-|🧔이현송|AI & Front-End|lhs7615@naver.com|
+|🧒전도명|Distribution & Front-End||
+|🧑김민기|Back-End||
+|🧑장진우|NLP & Back-End||
+|🧔이현송|Recommendation Algorithm|lhs7615@naver.com|
 
 
 
