@@ -1,6 +1,7 @@
 package com.spuit.maum.musicserver.domain.music;
 
 import com.spuit.maum.musicserver.domain.common.DomainModel;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -32,6 +33,7 @@ public class Music {
   String name;
   String singer;
   String jacketUrl;
+  @Column(columnDefinition = "TEXT")
   String lyric;
 
   String fear;
