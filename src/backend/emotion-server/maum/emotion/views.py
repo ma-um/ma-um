@@ -1,5 +1,3 @@
-from django.shortcuts import get_object_or_404
-from recommendation.models import Diary
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
 import torch
@@ -7,18 +5,10 @@ import gluonnlp as nlp
 from .apps import EmotionConfig, BERTClassifier, BERTDataset
 
 @api_view(['POST'])
-def diary2emotion(request, diary_id):
-
-    # 실제로 실행할 때에는 주석처리 할 것
-    diary = get_object_or_404(Diary, pk = diary_id)
-    input_data = diary.content
-
-    # # 실제로 실행할 때 주석을 풀 것
-    # url = 'http://127.0.0.1:8000/diary2emotion'
-    # response = requests.post(url)
-    # input_data = response.body.content
+def diary2emotion(request):
     
-    device = torch.device("cuda:0" if (torch.cuda.is_available()) else "cpu")
+    input_data = request.POST['content']
+    device = torch.device("cpu")
     bertmodel, vocab = EmotionConfig.bertmodel, EmotionConfig.vocab
     max_len = 64
     batch_size = 64
@@ -27,6 +17,7 @@ def diary2emotion(request, diary_id):
     model = BERTClassifier(bertmodel, dr_rate=0.5).to(device)
     model.load_state_dict(torch.load('./model.pt', map_location=device))
 
+    # 감정 추출 함수
     def predict(predict_sentence):
         global logits
 
@@ -48,9 +39,10 @@ def diary2emotion(request, diary_id):
                 logits=i
                 logits = logits.detach().cpu().numpy()
 
-    sentence = input_data
-    predict(sentence)
+    # 감정 추출
+    predict(input_data)
 
+    # 감정 스케일링
     for idx in range(len(logits)):
         logits[idx] = int((float(logits[idx])+5)/13 * 100)
     
@@ -59,5 +51,4 @@ def diary2emotion(request, diary_id):
         'result': f'{logits}'
     }
     
-    return JsonResponse({'status': '200', 'data': data}, json_dumps_params={'ensure_ascii': False}, status=200) 
-    # return JsonResponse({'status': response.status_code ,'data': data}, safe=True, json_dumps_params={'ensure_ascii': False}, status=200) 
+    return JsonResponse({'data': data}, safe=True, json_dumps_params={'ensure_ascii': False}, status=200) 
