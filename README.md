@@ -6,7 +6,7 @@
 
 |NAME|ROLE|EMAIL|
 |------|---|---|
-|🧒전도명|Distribution & Front-End||
+|🧔전도명|Distribution & Front-End||
 |🧑김민기|Back-End||
 |🧑장진우|NLP & Back-End||
 |🧔이현송|Recommendation Algorithm|lhs7615@naver.com|
