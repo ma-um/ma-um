@@ -7,6 +7,8 @@ from django.http import JsonResponse
 import requests
 from rest_framework.response import Response
 import json
+
+
 @api_view(['POST'])
 def music_recommendation(request):
 
@@ -16,7 +18,7 @@ def music_recommendation(request):
     emotion = json.loads(json_acceptable_string)
     emotion = [emotion['fear'], emotion['surprise'], emotion['anger'], emotion['sadness'], emotion['neutrality'], emotion['happiness'], emotion['disgust'], emotion['pleasure'], emotion['embarrassment'], emotion['unrest'], emotion['bruise']]
 
-    # 음악에 대한 감정을 스케일링한다.
+    # 음악에 대한 감정을 스케일링
     musics = get_list_or_404(Music)
     tmp = []
     idx1 = 0
@@ -27,6 +29,7 @@ def music_recommendation(request):
         idx1 += 1
 
     # 추천 알고리즘
+    
     # arr 은 음악 감정 데이터
     arr = np.array(tmp)
     result= np.subtract(arr, emotion)
@@ -40,6 +43,7 @@ def music_recommendation(request):
     result = sum.number
     result = result.to_numpy()
 
+    # 추천 음악의 primary key를 value 로 넣어서 보낸다.
     data = {
 		"musicIdList" :[
             {"id": int(musics[result[0]].pk)},
