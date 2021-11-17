@@ -19,3 +19,11 @@ spring:
         dialect: org.hibernate.dialect.MariaDBDialect
 server:
   port: 8093
+
+server-url:
+  auth:
+    base: http://localhost:8091/api/v1/user
+  diary:
+    base: http://localhost:8092/api/v1/diary
+  django:
+    base: k207.ssafy.io:8000
