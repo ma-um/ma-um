@@ -10,16 +10,13 @@ import json
 @api_view(['POST'])
 def music_recommendation(request):
 
+    # POST 로 emotions 를 받아오고 json 으로 불러오는 과정
     response = request.POST['emotions']
     json_acceptable_string = response.replace("'", "\"") 
     emotion = json.loads(json_acceptable_string)
-    # response = request.POST()
-    # input 일기로부터 가져온 감정 리스트
-    # emotion = response.json()
-    # emotion = [emotion.fear, emotion.surprise, emotion.anger, emotion.sadness, emotion.neutrality, emotion.happiness, emotion.disgust, emotion.pleasure, emotion.embarrassment, emotion.unrest, emotion.bruise]
     emotion = [emotion['fear'], emotion['surprise'], emotion['anger'], emotion['sadness'], emotion['neutrality'], emotion['happiness'], emotion['disgust'], emotion['pleasure'], emotion['embarrassment'], emotion['unrest'], emotion['bruise']]
 
-    # arr 은 음악 감정 데이터
+    # 음악에 대한 감정을 스케일링한다.
     musics = get_list_or_404(Music)
     tmp = []
     idx1 = 0
@@ -29,6 +26,8 @@ def music_recommendation(request):
             tmp[idx1][idx] = int((float(tmp[idx1][idx])+5)/13 * 100)
         idx1 += 1
 
+    # 추천 알고리즘
+    # arr 은 음악 감정 데이터
     arr = np.array(tmp)
     result= np.subtract(arr, emotion)
     result = np.abs(result)
