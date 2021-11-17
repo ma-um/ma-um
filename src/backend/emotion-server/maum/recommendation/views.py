@@ -5,15 +5,19 @@ import pandas as pd
 from .models import Music
 from django.http import JsonResponse
 import requests
+from rest_framework.response import Response
+import json
+@api_view(['POST'])
+def music_recommendation(request):
 
-@api_view(['GET', 'POST'])
-def emotion_recommendation(request):
-    url = 'http://127.0.0.1:8000/emotion/1/diary2emotion/'
-    response = requests.get(url)
-
+    response = request.POST['emotions']
+    json_acceptable_string = response.replace("'", "\"") 
+    emotion = json.loads(json_acceptable_string)
+    # response = request.POST()
     # input 일기로부터 가져온 감정 리스트
-    emotion = response.json()['data']['result'][1:-2]
-    emotion = list(map(int, emotion.split('. ')))
+    # emotion = response.json()
+    # emotion = [emotion.fear, emotion.surprise, emotion.anger, emotion.sadness, emotion.neutrality, emotion.happiness, emotion.disgust, emotion.pleasure, emotion.embarrassment, emotion.unrest, emotion.bruise]
+    emotion = [emotion['fear'], emotion['surprise'], emotion['anger'], emotion['sadness'], emotion['neutrality'], emotion['happiness'], emotion['disgust'], emotion['pleasure'], emotion['embarrassment'], emotion['unrest'], emotion['bruise']]
 
     # arr 은 음악 감정 데이터
     musics = get_list_or_404(Music)
@@ -48,4 +52,4 @@ def emotion_recommendation(request):
             ]
         }
 
-    return JsonResponse({'status': response.status_code ,'data': data}, json_dumps_params={'ensure_ascii': False}, status=200)
+    return Response({'status': 200, 'data': data}, status=200)

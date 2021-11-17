@@ -26,17 +26,17 @@ class Music(models.Model):
         # fields = ('id')
 
 
-class Diary(models.Model):
-    user_id = models.CharField(max_length=20)
-    title = models.TextField()
-    content = models.TextField()
-    registeration_time = models.DateTimeField(auto_now=True)
-    class Meta:
-        db_table = u'diary'
+# class Diary(models.Model):
+#     user_id = models.CharField(max_length=20)
+#     title = models.TextField()
+#     content = models.TextField()
+#     registeration_time = models.DateTimeField(auto_now=True)
+#     class Meta:
+#         db_table = u'diary'
 
     
-class Diary_Music(models.Model):
-    music = models.ForeignKey(Music, on_delete=CASCADE)
-    diary = models.ForeignKey(Diary, on_delete=CASCADE)
-    class Meta:
-        db_table = u'diary_music'
+# class Diary_Music(models.Model):
+#     music = models.ForeignKey(Music, on_delete=CASCADE)
+#     diary = models.ForeignKey(Diary, on_delete=CASCADE)
+#     class Meta:
+#         db_table = u'diary_music'
