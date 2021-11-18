@@ -1,10 +1,14 @@
 package com.spuit.maum.musicserver.application.music;
 
+import com.spuit.maum.musicserver.domain.common.exception.ResourceNotFoundException;
 import com.spuit.maum.musicserver.domain.emotion.EmotionDto;
 import com.spuit.maum.musicserver.domain.music.DiaryMusic;
 import com.spuit.maum.musicserver.domain.music.DiaryMusicRepository;
+import com.spuit.maum.musicserver.domain.music.Music;
+import com.spuit.maum.musicserver.domain.music.MusicDto;
 import com.spuit.maum.musicserver.domain.music.MusicRepository;
 import com.spuit.maum.musicserver.infrastructure.webclient.MusicRecommendationRequest;
+import com.spuit.maum.musicserver.infrastructure.webclient.MusicRecommendationWebClientResponse.MusicId;
 import com.spuit.maum.musicserver.infrastructure.webclient.WebClientDispatcher;
 import com.spuit.maum.musicserver.web.response.Music.GetMusicListResponse;
 import io.swagger.models.auth.In;
@@ -30,13 +34,27 @@ public class MusicServiceImpl implements MusicService {
   private final WebClientDispatcher webClientDispatcher;
 
   @Override
-  public GetMusicListResponse setRecommendationMusicList(String diaryid, EmotionDto emotionDto) {
+  public GetMusicListResponse setRecommendationMusicList(String diaryId, EmotionDto emotionDto) {
 
     List<Integer> existingMusicIdList = new ArrayList<>();
-    diaryMusicRepository.findAllByDiaryId(diaryid)
+    diaryMusicRepository.findAllByDiaryId(diaryId)
         .forEach(diaryMusic -> existingMusicIdList.add(diaryMusic.getMusicId()));
 
-    webClientDispatcher.musicRecommendation(new MusicRecommendationRequest(emotionDto, existingMusicIdList))
-    return null;
+    List<MusicId> musicIdList =
+        webClientDispatcher.musicRecommendation(new MusicRecommendationRequest(emotionDto,
+            existingMusicIdList)).getMusicIdList();
+
+    List<MusicDto> musicDtoList = new ArrayList<>();
+
+    musicIdList.forEach(musicId -> {
+          musicDtoList.add(MusicDto.of(musicRepository.findById(musicId.getId()).orElseThrow(
+              () -> new ResourceNotFoundException("musicId", Music.class,
+                  musicId.getId().toString()))));
+          diaryMusicRepository
+              .save(DiaryMusic.builder().diaryId(diaryId).musicId(musicId.getId()).build());
+        }
+    );
+
+    return new GetMusicListResponse(musicDtoList);
   }
 }

@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author cherrytomato1
  * @version 1.0.0
  */
-public interface MusicRepository extends JpaRepository<Music, String> {
+public interface MusicRepository extends JpaRepository<Music, Integer> {
 }
