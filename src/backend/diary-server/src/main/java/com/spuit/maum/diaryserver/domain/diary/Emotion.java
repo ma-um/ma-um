@@ -1,4 +1,4 @@
-package com.spuit.maum.diaryserver.domain.emotion;
+package com.spuit.maum.diaryserver.domain.diary;
 
 import java.lang.reflect.Field;
 import lombok.Builder;

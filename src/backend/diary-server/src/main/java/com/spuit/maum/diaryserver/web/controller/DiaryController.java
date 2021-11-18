@@ -7,6 +7,7 @@ import com.spuit.maum.diaryserver.web.request.Diary.DiaryEmotionCustomRequest;
 import com.spuit.maum.diaryserver.web.request.Diary.DiaryWriteRequest;
 import com.spuit.maum.diaryserver.web.response.ApiResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryCalenderResponse;
+import com.spuit.maum.diaryserver.web.response.Diary.DiaryCardResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryWriteResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -54,7 +55,7 @@ public class DiaryController {
       @ApiIgnore @RequestParam(required = false) @AuthenticationParameter String userId,
       @PathVariable Integer year, @PathVariable Integer month) {
 
-    DiaryCalenderResponse diaryCalenderResponse = diaryService.getCalenderDiaryList(userId, year,
+    DiaryCalenderResponse diaryCalenderResponse = diaryService.findCalenderDiaryList(userId, year,
         month);
     return ApiResponse.defaultOk(diaryCalenderResponse);
   }
@@ -68,6 +69,18 @@ public class DiaryController {
 
     diaryService.setDiaryCustomEmotion(userId, diaryEmotionCustomRequest);
     return ApiResponse.defaultOk(null);
+  }
+
+  @GetMapping("/card/{year}/{month}/{day}")
+  public ApiResponse<?> getDiaryCard(
+      @ApiIgnore @AuthenticationParameter @RequestHeader(name =
+          HttpHeaders.AUTHORIZATION) String token,
+      @ApiIgnore @RequestParam(required = false) @AuthenticationParameter String userId,
+      @PathVariable Integer year, @PathVariable Integer month, @PathVariable Integer day) {
+
+    DiaryCardResponse diaryCardResponse = diaryService.findDiaryCardByUserIdAndDate(userId, year,
+        month, day);
+    return ApiResponse.defaultOk(diaryCardResponse);
   }
 
 }

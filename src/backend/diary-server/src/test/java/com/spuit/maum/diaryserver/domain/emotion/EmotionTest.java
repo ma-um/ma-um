@@ -2,6 +2,7 @@ package com.spuit.maum.diaryserver.domain.emotion;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.spuit.maum.diaryserver.domain.diary.Emotion;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
