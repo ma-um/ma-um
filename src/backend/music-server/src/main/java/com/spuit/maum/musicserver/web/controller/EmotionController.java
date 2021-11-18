@@ -21,7 +21,7 @@ public class EmotionController {
 
   private final EmotionService emotionService;
 
-  @GetMapping("/analysis")
+  @PostMapping("/analysis")
   public ApiResponse<?> analysisEmotion(@RequestBody String content) {
 
     GetEmotionResponse getEmotionResponse = emotionService
@@ -40,7 +40,7 @@ public class EmotionController {
   public ApiResponse<?> setCustomEmotion(@PathVariable String diaryId, @RequestBody
       SetCustomEmotionRequest setCustomEmotionRequest) {
 
-    emotionService.updateEmotionByDiaryId(diaryId, setCustomEmotionRequest);
+    emotionService.updateOrSaveEmotionByDiaryId(diaryId, setCustomEmotionRequest);
 
     return ApiResponse.defaultOk(null);
   }

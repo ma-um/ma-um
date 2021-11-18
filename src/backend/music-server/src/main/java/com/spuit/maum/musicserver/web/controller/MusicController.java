@@ -38,7 +38,7 @@ public class MusicController {
   public ApiResponse<?> getMusicListByDiaryId(@PathVariable String diaryId) {
     GetMusicListResponse musicListResponse =
         musicService.getMusicList(diaryId);
-    return musicListResponse;
+    return ApiResponse.defaultOk(musicListResponse);
   }
 
   @GetMapping("/recommendation/{diaryId}")

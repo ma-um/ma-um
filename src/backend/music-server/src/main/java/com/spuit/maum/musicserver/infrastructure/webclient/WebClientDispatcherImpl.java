@@ -2,9 +2,12 @@ package com.spuit.maum.musicserver.infrastructure.webclient;
 
 import com.google.common.net.HttpHeaders;
 import com.spuit.maum.musicserver.domain.common.exception.UnauthorizedException;
+import com.spuit.maum.musicserver.domain.music.MusicDto;
+import com.spuit.maum.musicserver.infrastructure.webclient.MusicRecommendationWebClientResponse.MusicId;
 import com.spuit.maum.musicserver.web.response.ApiResponse;
 import com.spuit.maum.musicserver.web.response.emotion.DiaryEmotionResponse;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -24,6 +27,8 @@ public class WebClientDispatcherImpl implements WebClientDispatcher {
   private String djangoServerBaseUrl = "http://localhost:8092/api/v1/";
   private String emotionUrl = "emotion/diary2emotion";
   private String recommendationUrl = "recommendation/music_recommendation";
+
+  private final Integer MAX_MUSIC_REC_COUNT = 3;
 
   public WebClientDispatcherImpl(WebClient.Builder builder) {
     this.webClient = builder.build();
@@ -80,7 +85,7 @@ public class WebClientDispatcherImpl implements WebClientDispatcher {
   public MusicRecommendationWebClientResponse musicRecommendation(MusicRecommendationRequest musicRecommendationRequest) {
     String uri = djangoServerBaseUrl + recommendationUrl;
     try{
-      return webClient
+      MusicRecommendationWebClientResponse musicRecommendationWebClientResponse = webClient
           .post()
           .uri(uri)
           .bodyValue(musicRecommendationRequest)
@@ -88,6 +93,13 @@ public class WebClientDispatcherImpl implements WebClientDispatcher {
           .retrieve()
           .bodyToMono(MusicRecommendationWebClientResponse.class)
           .block();
+
+      List<MusicId> musicIdList = musicRecommendationWebClientResponse.getMusicIdList();
+      while (musicIdList.size() > 3) {
+        musicIdList.remove(musicIdList.size() - 1);
+      }
+
+      return musicRecommendationWebClientResponse;
     } catch (Exception e) {
       e.printStackTrace();
       throw new RuntimeException(e.getMessage());

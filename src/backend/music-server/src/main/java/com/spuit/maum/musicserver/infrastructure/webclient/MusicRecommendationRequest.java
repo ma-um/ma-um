@@ -13,5 +13,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MusicRecommendationRequest {
   EmotionDto emotions;
-  List<Integer> existedMusicIdList;
+  List<Long> existedMusicIdList;
 }

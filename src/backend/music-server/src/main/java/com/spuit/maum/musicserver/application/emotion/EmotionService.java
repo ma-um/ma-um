@@ -16,5 +16,5 @@ public interface EmotionService extends ApplicationService {
 
   GetEmotionResponse findEmotionByDiaryId(String diaryId);
 
-  void updateEmotionByDiaryId(String diaryId, SetCustomEmotionRequest setCustomEmotionRequest);
+  void updateOrSaveEmotionByDiaryId(String diaryId, SetCustomEmotionRequest setCustomEmotionRequest);
 }

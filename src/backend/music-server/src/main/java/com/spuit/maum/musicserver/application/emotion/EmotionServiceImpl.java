@@ -40,11 +40,10 @@ public class EmotionServiceImpl implements EmotionService {
   }
 
   @Override
-  public void updateEmotionByDiaryId(String diaryId,
+  public void updateOrSaveEmotionByDiaryId(String diaryId,
       SetCustomEmotionRequest setCustomEmotionRequest) {
     Emotion emotion =
-        emotionRepository.findById(diaryId).orElseThrow(() -> new ResourceNotFoundException(
-            "diaryId", Emotion.class, diaryId));
+        emotionRepository.findById(diaryId).orElseGet(() -> new Emotion(diaryId));
     emotion.updateEmotion(setCustomEmotionRequest.getEmotion());
     emotionRepository.save(emotion);
   }

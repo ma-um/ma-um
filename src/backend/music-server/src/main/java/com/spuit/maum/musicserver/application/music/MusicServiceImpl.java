@@ -46,7 +46,7 @@ public class MusicServiceImpl implements MusicService {
   @Override
   public GetMusicListResponse setRecommendationMusicList(String diaryId, EmotionDto emotionDto) {
 
-    List<Integer> existingMusicIdList = new ArrayList<>();
+    List<Long> existingMusicIdList = new ArrayList<>();
     diaryMusicRepository.findAllByDiaryId(diaryId)
         .forEach(diaryMusic -> existingMusicIdList.add(diaryMusic.getMusicId()));
 

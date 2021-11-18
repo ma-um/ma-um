@@ -44,6 +44,10 @@ public class Emotion {
   Integer unrest;
   Integer bruise;
 
+  public Emotion(String id) {
+    this.id = id;
+  }
+
   public void updateEmotion(EmotionDto emotionDto) {
     this.fear = emotionDto.fear;
     this.surprise = emotionDto.surprise;

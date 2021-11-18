@@ -14,7 +14,7 @@ public class MusicRecommendationWebClientResponse {
   @AllArgsConstructor
   @NoArgsConstructor
   public static class MusicId {
-    Integer id;
+    Long id;
   }
 
   List<MusicId> musicIdList;
