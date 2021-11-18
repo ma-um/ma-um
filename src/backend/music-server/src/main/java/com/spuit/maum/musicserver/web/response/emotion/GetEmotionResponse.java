@@ -7,5 +7,5 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class GetEmotionResponse {
-  EmotionDto emotionDto;
+  EmotionDto emotion;
 }

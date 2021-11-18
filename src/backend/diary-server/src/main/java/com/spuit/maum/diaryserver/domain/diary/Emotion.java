@@ -1,29 +1,33 @@
 package com.spuit.maum.diaryserver.domain.diary;
 
 import java.lang.reflect.Field;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Builder
 @Getter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Emotion {
 
   private String topEmotion;
 
-  private final Integer fear;
-  private final Integer surprise;
-  private final Integer anger;
-  private final Integer sadness;
-  private final Integer neutrality;
+  private Integer fear;
+  private Integer surprise;
+  private Integer anger;
+  private Integer sadness;
+  private Integer neutrality;
 
-  private final Integer happiness;
-  private final Integer disgust;
-  private final Integer pleasure;
-  private final Integer embarrassment;
-  private final Integer unrest;
-  private final Integer bruise;
+  private Integer happiness;
+  private Integer disgust;
+  private Integer pleasure;
+  private Integer embarrassment;
+  private Integer unrest;
+  private Integer bruise;
 
   public Emotion setTopEmotion(String topEmotion) {
     this.topEmotion = topEmotion;

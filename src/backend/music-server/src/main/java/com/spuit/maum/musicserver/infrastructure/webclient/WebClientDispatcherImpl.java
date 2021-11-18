@@ -26,7 +26,7 @@ public class WebClientDispatcherImpl implements WebClientDispatcher {
   //  @Value("${url.emotion.base}")
   private String djangoServerBaseUrl = "http://localhost:8092/api/v1/";
 
-  private String diaryServer = "htttp://localhost:8092/api/v1/diary";
+  private String diaryServer = "htttp://localhost:8000/";
   private String emotionUrl = "emotion/diary2emotion";
   private String recommendationUrl = "recommendation/music_recommendation";
 

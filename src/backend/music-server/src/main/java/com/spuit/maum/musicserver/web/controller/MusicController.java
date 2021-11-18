@@ -44,7 +44,7 @@ public class MusicController {
   @GetMapping("/recommendation/{diaryId}")
   public ApiResponse<?> setRecommendationMusicList(@PathVariable String diaryId) {
 
-    EmotionDto emotionDto = emotionService.findEmotionByDiaryId(diaryId).getEmotionDto();
+    EmotionDto emotionDto = emotionService.findEmotionByDiaryId(diaryId).getEmotion();
 
     GetMusicListResponse musicListResponse =
         musicService.setRecommendationMusicList(diaryId, emotionDto);

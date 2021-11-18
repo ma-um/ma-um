@@ -1,12 +1,16 @@
 package com.spuit.maum.diaryserver.domain.diary;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Getter
 @SuperBuilder
+@NoArgsConstructor
 public class Music {
-  private final String name;
-  private final String singer;
-  private final String jacketUrl;
+  Long id;
+  String name;
+  String singer;
+  String jacketUrl;
+  String lyric;
 }
