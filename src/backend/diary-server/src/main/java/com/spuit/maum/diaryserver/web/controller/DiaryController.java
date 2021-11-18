@@ -8,6 +8,7 @@ import com.spuit.maum.diaryserver.web.request.Diary.DiaryWriteRequest;
 import com.spuit.maum.diaryserver.web.response.ApiResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryCalenderResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryCardResponse;
+import com.spuit.maum.diaryserver.web.response.Diary.DiaryTimelineResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryWriteResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -83,4 +84,25 @@ public class DiaryController {
     return ApiResponse.defaultOk(diaryCardResponse);
   }
 
+  @GetMapping("/timeline")
+  public ApiResponse<?> getTimelineList(
+      @ApiIgnore @AuthenticationParameter @RequestHeader(name =
+          HttpHeaders.AUTHORIZATION) String token,
+      @ApiIgnore @RequestParam(required = false) @AuthenticationParameter String userId
+  ) {
+    DiaryTimelineResponse diaryTimelineResponse = diaryService.findTimelineByUserId(userId);
+
+    return ApiResponse.defaultOk(diaryTimelineResponse);
+  }
+
+  @GetMapping("/detail/{year}/{month}/{day}")
+  public ApiResponse<?> diaryDetails(
+      @ApiIgnore @AuthenticationParameter @RequestHeader(name =
+          HttpHeaders.AUTHORIZATION) String token,
+      @ApiIgnore @RequestParam(required = false) @AuthenticationParameter String userId,
+      @PathVariable Integer year, @PathVariable Integer month, @PathVariable Integer day) {
+
+
+    return ApiResponse.defaultOk(null);
+  }
 }

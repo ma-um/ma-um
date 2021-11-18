@@ -10,10 +10,12 @@ import com.spuit.maum.diaryserver.web.request.Diary.DiaryEmotionCustomRequest;
 import com.spuit.maum.diaryserver.web.request.Diary.DiaryWriteRequest;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryCalenderResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryCardResponse;
+import com.spuit.maum.diaryserver.web.response.Diary.DiaryTimelineResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryWriteResponse;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
+import java.util.LinkedList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -86,6 +88,16 @@ public class DiaryServiceImpl implements DiaryService {
             first.toLocalDate().toString()));
 
     return createDiaryCard(diary);
+  }
+
+  @Override
+  public DiaryTimelineResponse findTimelineByUserId(String userId) {
+    List<Diary> diaryList = diaryRepository.findAllByUserIdOrderByRegistrationDate(userId);
+    List<DiaryCardResponse> diaryCardList = new LinkedList<>();
+    diaryList.forEach(diary ->
+        diaryCardList.add(createDiaryCard(diary))
+    );
+    return new DiaryTimelineResponse(diaryCardList);
   }
 
   private DiaryCardResponse createDiaryCard(Diary diary) {
