@@ -1,5 +1,6 @@
 package com.spuit.maum.musicserver.domain.music;
 
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -8,6 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author cherrytomato1
  * @version 1.0.0
  */
-public interface MusicRepository extends JpaRepository<Music, String> {
-
+public interface MusicRepository extends JpaRepository<Music, Long> {
+  List<Music> findDistinctByIdIn(List<Long> id);
 }

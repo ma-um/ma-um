@@ -24,6 +24,10 @@ import lombok.ToString;
 @ToString
 @Entity
 public class Emotion {
+  /*
+
+    Id는 diary, music의 id를 참조
+   */
   @Id
   String id;
   Integer type;
@@ -39,4 +43,22 @@ public class Emotion {
   Integer embarrassment;
   Integer unrest;
   Integer bruise;
+
+  public Emotion(String id) {
+    this.id = id;
+  }
+
+  public void updateEmotion(EmotionDto emotionDto) {
+    this.fear = emotionDto.fear;
+    this.surprise = emotionDto.surprise;
+    this.anger = emotionDto.anger;
+    this.sadness = emotionDto.sadness;
+    this.neutrality = emotionDto.neutrality;
+    this.happiness = emotionDto.happiness;
+    this.disgust = emotionDto.disgust;
+    this.pleasure = emotionDto.pleasure;
+    this.embarrassment = emotionDto.embarrassment;
+    this.unrest = emotionDto.unrest;
+    this.bruise = emotionDto.bruise;
+  }
 }
