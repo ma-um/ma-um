@@ -1,4 +1,4 @@
-package com.spuit.maum.diaryserver.web.request;
+package com.spuit.maum.diaryserver.web.request.Diary;
 
 import java.time.LocalDate;
 import lombok.Getter;

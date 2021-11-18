@@ -3,11 +3,15 @@ package com.spuit.maum.diaryserver.web.controller;
 import com.google.common.net.HttpHeaders;
 import com.spuit.maum.diaryserver.application.diary.DiaryService;
 import com.spuit.maum.diaryserver.web.aspect.AuthenticationParameter;
-import com.spuit.maum.diaryserver.web.request.DiaryWriteRequest;
+import com.spuit.maum.diaryserver.web.request.Diary.DiaryWriteRequest;
 import com.spuit.maum.diaryserver.web.response.ApiResponse;
-import com.spuit.maum.diaryserver.web.response.DiaryWriteResponse;
+import com.spuit.maum.diaryserver.web.response.Diary.DiaryCalenderResponse;
+import com.spuit.maum.diaryserver.web.response.Diary.DiaryWriteResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -39,7 +43,18 @@ public class DiaryController {
 
     DiaryWriteResponse diaryWriteResponse = diaryService.write(userId, diaryWriteRequest);
 
-    return ApiResponse.defaultOk(diaryWriteResponse);
+    return ApiResponse.of(HttpStatus.CREATED, "success", diaryWriteResponse);
   }
 
+  @GetMapping("/calender/{year}/{month}")
+  public ApiResponse<?> getCalenderDiaryList(
+      @ApiIgnore @AuthenticationParameter @RequestHeader(name =
+          HttpHeaders.AUTHORIZATION) String token,
+      @ApiIgnore @RequestParam(required = false) @AuthenticationParameter String userId,
+      @PathVariable Integer year, @PathVariable Integer month) {
+
+    DiaryCalenderResponse diaryCalenderResponse = diaryService.getCalenderDiaryList(userId, year,
+        month);
+    return ApiResponse.defaultOk(diaryCalenderResponse);
+  }
 }

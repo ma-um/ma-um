@@ -1,6 +1,9 @@
 package com.spuit.maum.diaryserver.domain.diary;
 
 import com.spuit.maum.diaryserver.domain.diary.Diary;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -10,5 +13,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 1.0.0
  */
 public interface DiaryRepository extends JpaRepository<Diary, String> {
-
+  List<Diary> findAllByRegistrationDateBetween(LocalDateTime first, LocalDateTime last);
 }

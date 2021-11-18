@@ -4,8 +4,14 @@ import com.spuit.maum.diaryserver.domain.diary.Diary;
 import com.spuit.maum.diaryserver.domain.diary.DiaryRepository;
 import com.spuit.maum.diaryserver.domain.emotion.Emotion;
 import com.spuit.maum.diaryserver.infrastructure.webclient.WebClientDispatcher;
-import com.spuit.maum.diaryserver.web.request.DiaryWriteRequest;
-import com.spuit.maum.diaryserver.web.response.DiaryWriteResponse;
+import com.spuit.maum.diaryserver.web.request.Diary.DiaryWriteRequest;
+import com.spuit.maum.diaryserver.web.response.Diary.DiaryCalenderResponse;
+import com.spuit.maum.diaryserver.web.response.Diary.DiaryWriteResponse;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +38,16 @@ public class DiaryServiceImpl implements DiaryService {
     Emotion responseEmotion =
         webClientDispatcher.getEmotionByDiaryContent(diaryWriteRequest.getContent());
     return new DiaryWriteResponse(responseEmotion);
+  }
+
+  @Override
+  public DiaryCalenderResponse getCalenderDiaryList(String userId, Integer year, Integer month) {
+    LocalDate monthFirstDate = LocalDate.of(year, month, 1);
+    LocalDate monthLastDate = monthFirstDate.with(TemporalAdjusters.lastDayOfMonth());
+    List<Diary> diaryList =
+        diaryRepository.findAllByRegistrationDateBetween(monthFirstDate.atStartOfDay(),
+            monthLastDate.atTime(23, 59, 59));
+
+    return new DiaryCalenderResponse(diaryList);
   }
 }
