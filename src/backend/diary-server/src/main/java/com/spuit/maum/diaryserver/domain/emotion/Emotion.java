@@ -5,12 +5,13 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class Emotions {
+public class Emotion {
   Integer fear;
   Integer surprise;
   Integer anger;
   Integer sadness;
   Integer neutrality;
+
   Integer happiness;
   Integer disgust;
   Integer pleasure;

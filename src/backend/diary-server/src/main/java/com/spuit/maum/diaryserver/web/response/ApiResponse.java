@@ -42,8 +42,4 @@ public class ApiResponse<T> {
   public static <T> ApiResponse<T> defaultOk(T data) {
     return new ApiResponse<>(HttpStatus.OK, 200, "success", data);
   }
-
-  public HttpStatus getValue() {
-    return statusCode;
-  }
 }

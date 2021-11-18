@@ -1,2 +1,12 @@
-package com.spuit.maum.diaryserver.web.response;public class DiaryWriteResponse {
+package com.spuit.maum.diaryserver.web.response;
+
+import com.spuit.maum.diaryserver.domain.emotion.Emotion;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
+public class DiaryWriteResponse {
+  Emotion emotion;
 }

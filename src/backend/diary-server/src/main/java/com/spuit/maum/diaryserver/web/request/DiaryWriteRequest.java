@@ -1,2 +1,15 @@
-package com.spuit.maum.diaryserver.web.request;public class DiaryWriteRequest {
+package com.spuit.maum.diaryserver.web.request;
+
+import java.time.LocalDate;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Getter
+@RequiredArgsConstructor
+public class DiaryWriteRequest {
+  @DateTimeFormat(pattern="yyyy-MM-dd")
+  LocalDate date;
+  String subject;
+  String content;
 }
