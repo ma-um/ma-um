@@ -1,9 +1,9 @@
 package com.spuit.maum.musicserver.web.controller;
 
-import com.spuit.maum.musicserver.web.request.MusicRecommendationRequest;
+import com.spuit.maum.musicserver.infrastructure.webclient.MusicRecommendationRequest;
 import com.spuit.maum.musicserver.web.response.emotion.DiaryEmotionResponse;
 import com.spuit.maum.musicserver.infrastructure.webclient.WebClientDispatcher;
-import com.spuit.maum.musicserver.web.response.Music.MusicRecommendationResponse;
+import com.spuit.maum.musicserver.infrastructure.webclient.MusicRecommendationWebClientResponse;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -40,9 +40,9 @@ public class TestController {
   @PostMapping("api/v1/test3")
   public ResponseEntity<?> test3(@RequestBody MusicRecommendationRequest musicRecommendationRequest) {
 
-    MusicRecommendationResponse musicRecommendationResponse = webClientDispatcher
+    MusicRecommendationWebClientResponse musicRecommendationWebClientResponse = webClientDispatcher
         .musicRecommendation(musicRecommendationRequest);
 
-    return ResponseEntity.of(Optional.of(musicRecommendationResponse));
+    return ResponseEntity.of(Optional.of(musicRecommendationWebClientResponse));
   }
 }

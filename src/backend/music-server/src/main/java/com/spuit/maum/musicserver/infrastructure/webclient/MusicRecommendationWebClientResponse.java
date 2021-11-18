@@ -1,4 +1,4 @@
-package com.spuit.maum.musicserver.web.response.Music;
+package com.spuit.maum.musicserver.infrastructure.webclient;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MusicRecommendationResponse {
+public class MusicRecommendationWebClientResponse {
 
   @Getter
   @AllArgsConstructor
