@@ -6,7 +6,7 @@
 
 |NAME|ROLE|EMAIL|
 |------|---|---|
-|👦전도명|Distribution & Front-End||
+|👦전도명|Distribution & Front-End|soulplay95@gmail.com|
 |🧑김민기|Back-End||
 |🧑장진우|NLP & Back-End||
 |👦이현송|Recommendation Algorithm|lhs7615@naver.com|
@@ -64,9 +64,9 @@ YOLO(You Only Look Once)는 대표적인 단일 단계 방식의 객체 탐지 �
 
 ## 📜 기획
 
-### [WireFrame](https://www.figma.com/file/2MsgYMOiJ8pfkabvcmoWnX/Study-With-Us-%ED%99%94%EB%A9%B4%EC%84%A4%EA%B3%84?node-id=0%3A1)
+### [WireFrame](https://www.figma.com/file/TCxtH4yewUDNDvMt2XFnZa/%EB%A7%88%EC%9D%8C-%EC%99%80%EC%9D%B4%EC%96%B4-%ED%94%84%EB%A0%88%EC%9E%84)
 
-### [ERD](erd.png)
+### [ERD](https://www.erdcloud.com/d/JNCBKA983wkG2D8t7)
 
 
 
@@ -82,7 +82,7 @@ YOLO(You Only Look Once)는 대표적인 단일 단계 방식의 객체 탐지 �
 
 ## 🔌 Contributing
 
-### [API 명세서](https://docs.google.com/spreadsheets/d/1ie8E6G0lYDcWueaEh44aiWQ_lkphggbpnxSamp6uFsA/edit#gid=0)
+### [API 명세서](https://www.notion.so/API-8a9f37d221b84a39a954a6b48cc0627c)
 
 
 
