@@ -6,7 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -19,8 +21,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  */
 @ToString
 @Getter
+@SuperBuilder
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
+@NoArgsConstructor
 public abstract class BaseEntity {
 
   @GenericGenerator(name = "HashIdGenerator", strategy = "com.spuit.maum.diaryserver.domain.common"
@@ -29,6 +32,5 @@ public abstract class BaseEntity {
   @Id
   protected String id;
 
-  @CreatedDate
   protected LocalDateTime registrationDate;
 }

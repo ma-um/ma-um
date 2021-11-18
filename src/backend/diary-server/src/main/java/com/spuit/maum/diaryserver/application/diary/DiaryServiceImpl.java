@@ -1,5 +1,18 @@
 package com.spuit.maum.diaryserver.application.diary;
 
+import com.spuit.maum.diaryserver.domain.common.exception.ResourceNotFoundException;
+import com.spuit.maum.diaryserver.domain.diary.Diary;
+import com.spuit.maum.diaryserver.domain.diary.DiaryRepository;
+import com.spuit.maum.diaryserver.domain.emotion.Emotion;
+import com.spuit.maum.diaryserver.infrastructure.webclient.WebClientDispatcher;
+import com.spuit.maum.diaryserver.web.request.Diary.DiaryEmotionCustomRequest;
+import com.spuit.maum.diaryserver.web.request.Diary.DiaryWriteRequest;
+import com.spuit.maum.diaryserver.web.response.Diary.DiaryCalenderResponse;
+import com.spuit.maum.diaryserver.web.response.Diary.DiaryWriteResponse;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,6 +22,52 @@ import org.springframework.stereotype.Service;
  * @version 1.0.0
  */
 @Service
+@RequiredArgsConstructor
 public class DiaryServiceImpl implements DiaryService {
 
+  private final DiaryRepository diaryRepository;
+
+  private final WebClientDispatcher webClientDispatcher;
+
+  @Override
+  public DiaryWriteResponse write(String userId, DiaryWriteRequest diaryWriteRequest) {
+    Diary diary =
+        Diary.builder().title(diaryWriteRequest.getSubject()).userId(userId)
+            .content(diaryWriteRequest.getContent())
+            .registrationDate(diaryWriteRequest.getDate().atStartOfDay()).build();
+    diaryRepository.save(diary);
+    Emotion responseEmotion =
+        webClientDispatcher.getEmotionByDiaryContent(diaryWriteRequest.getContent())
+            .setDefaultTopEmotion().resetTopEmotionValue();
+    return new DiaryWriteResponse(responseEmotion);
+  }
+
+  @Override
+  public DiaryCalenderResponse getCalenderDiaryList(String userId, Integer year, Integer month) {
+    LocalDate monthFirstDate = LocalDate.of(year, month, 1);
+    LocalDate monthLastDate = monthFirstDate.with(TemporalAdjusters.lastDayOfMonth());
+    List<Diary> diaryList =
+        diaryRepository
+            .findAllByUserIdAndRegistrationDateBetweenOrderByRegistrationDate(userId,
+                monthFirstDate.atStartOfDay(),
+                monthLastDate.atTime(23, 59, 59));
+
+    return new DiaryCalenderResponse(diaryList);
+  }
+
+  @Override
+  public void setDiaryCustomEmotion(String userId,
+      DiaryEmotionCustomRequest diaryEmotionCustomRequest) {
+    Diary diary =
+        diaryRepository
+            .findByUserIdAndRegistrationDateBetween(userId,
+                diaryEmotionCustomRequest.getDate().atStartOfDay(),
+                diaryEmotionCustomRequest.getDate().atTime(23, 59, 59))
+            .orElseThrow(() -> new ResourceNotFoundException("date", Diary.class,
+                diaryEmotionCustomRequest.getDate().toString()));
+
+    webClientDispatcher.setEmotionByDiaryId(diary.getId(),
+        diaryEmotionCustomRequest.getEmotions()
+            .setTopEmotion(diaryEmotionCustomRequest.getTopEmotion()).setTopEmotionValue());
+  }
 }

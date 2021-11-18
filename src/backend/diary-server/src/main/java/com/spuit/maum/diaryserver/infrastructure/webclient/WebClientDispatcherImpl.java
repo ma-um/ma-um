@@ -2,6 +2,7 @@ package com.spuit.maum.diaryserver.infrastructure.webclient;
 
 import com.google.common.net.HttpHeaders;
 import com.spuit.maum.diaryserver.domain.common.exception.UnauthorizedException;
+import com.spuit.maum.diaryserver.domain.emotion.Emotion;
 import com.spuit.maum.diaryserver.web.response.ApiResponse;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -18,8 +19,8 @@ public class WebClientDispatcherImpl implements WebClientDispatcher {
 
   private final WebClient webClient;
 
-//  @Value("${url.auth.base}")
-  private String authUrl = "http://localhost:8091/api/v1/user";;
+  //  @Value("${url.auth.base}")
+  private String authUrl = "http://localhost:8091/api/v1/user";
 
   public WebClientDispatcherImpl(WebClient.Builder builder) {
     this.webClient = builder.build();
@@ -46,5 +47,25 @@ public class WebClientDispatcherImpl implements WebClientDispatcher {
     } catch (WebClientResponseException ex) {
       throw new UnauthorizedException(token);
     }
+  }
+
+  @Override
+  public Emotion getEmotionByDiaryContent(String content) {
+    return getDummyEmotion(content);
+  }
+
+  @Override
+  public void setEmotionByDiaryId(String diaryId, Emotion emotion) {
+    log.info("diary id - {} , emotion - {}", diaryId, emotion);
+  }
+
+  private Emotion getDummyEmotion(String Content) {
+    try {
+      Thread.sleep(2000L);
+    } catch (InterruptedException ex) {
+      ex.printStackTrace();
+    }
+    return Emotion.builder().fear(3).anger(5).disgust(30).bruise(20).embarrassment(22).happiness(55)
+        .neutrality(33).pleasure(50).sadness(32).surprise(12).unrest(55).build();
   }
 }

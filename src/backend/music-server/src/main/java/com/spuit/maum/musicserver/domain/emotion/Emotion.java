@@ -28,15 +28,15 @@ public class Emotion {
   String id;
   Integer type;
 
-  String fear;
-  String surprise;
-  String anger;
-  String sadness;
-  String neutrality;
-  String happiness;
-  String disgust;
-  String pleasure;
-  String embarrassment;
-  String unrest;
-  String bruise;
+  Integer fear;
+  Integer surprise;
+  Integer anger;
+  Integer sadness;
+  Integer neutrality;
+  Integer happiness;
+  Integer disgust;
+  Integer pleasure;
+  Integer embarrassment;
+  Integer unrest;
+  Integer bruise;
 }

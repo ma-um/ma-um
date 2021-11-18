@@ -22,7 +22,7 @@ public class HashIdGenerator implements IdentifierGenerator {
   @Override
   public Serializable generate(SharedSessionContractImplementor session, Object object) {
 
-    final String PREFIX = "G";
+    final String PREFIX = "D";
     final int ID_LENGTH = 16;
     String baseString = String.valueOf(System.currentTimeMillis());
 

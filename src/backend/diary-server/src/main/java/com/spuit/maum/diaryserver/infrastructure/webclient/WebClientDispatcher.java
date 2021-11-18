@@ -1,5 +1,7 @@
 package com.spuit.maum.diaryserver.infrastructure.webclient;
 
+import com.spuit.maum.diaryserver.domain.emotion.Emotion;
+
 /**
  * Rest 클라이언트 통신을 위한 서비스.
  *
@@ -10,4 +12,6 @@ package com.spuit.maum.diaryserver.infrastructure.webclient;
 public interface WebClientDispatcher {
 
   String authenticateAndGetUserId(String token);
+  Emotion getEmotionByDiaryContent(String content);
+  void setEmotionByDiaryId(String diaryId, Emotion emotion);
 }
