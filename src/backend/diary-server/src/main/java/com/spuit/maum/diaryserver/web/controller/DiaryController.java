@@ -3,6 +3,7 @@ package com.spuit.maum.diaryserver.web.controller;
 import com.google.common.net.HttpHeaders;
 import com.spuit.maum.diaryserver.application.diary.DiaryService;
 import com.spuit.maum.diaryserver.web.aspect.AuthenticationParameter;
+import com.spuit.maum.diaryserver.web.request.Diary.DiaryEmotionCustomRequest;
 import com.spuit.maum.diaryserver.web.request.Diary.DiaryWriteRequest;
 import com.spuit.maum.diaryserver.web.response.ApiResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryCalenderResponse;
@@ -57,4 +58,16 @@ public class DiaryController {
         month);
     return ApiResponse.defaultOk(diaryCalenderResponse);
   }
+
+  @PostMapping("/emotion")
+  public ApiResponse<?> setCustomEmotion(
+      @ApiIgnore @AuthenticationParameter @RequestHeader(name =
+          HttpHeaders.AUTHORIZATION) String token,
+      @ApiIgnore @RequestParam(required = false) @AuthenticationParameter String userId,
+      @RequestBody DiaryEmotionCustomRequest diaryEmotionCustomRequest) {
+
+    diaryService.setDiaryCustomEmotion(userId, diaryEmotionCustomRequest);
+    return ApiResponse.defaultOk(null);
+  }
+
 }

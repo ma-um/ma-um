@@ -1,15 +1,14 @@
 package com.spuit.maum.diaryserver.web.request.Diary;
 
+import com.spuit.maum.diaryserver.domain.emotion.Emotion;
 import java.time.LocalDate;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Getter
-@RequiredArgsConstructor
-public class DiaryWriteRequest {
+public class DiaryEmotionCustomRequest {
   @DateTimeFormat(pattern="yyyy-MM-d")
   LocalDate date;
-  String subject;
-  String content;
+  String topEmotion;
+  Emotion emotions;
 }

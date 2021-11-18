@@ -54,6 +54,11 @@ public class WebClientDispatcherImpl implements WebClientDispatcher {
     return getDummyEmotion(content);
   }
 
+  @Override
+  public void setEmotionByDiaryId(String diaryId, Emotion emotion) {
+    log.info("diary id - {} , emotion - {}", diaryId, emotion);
+  }
+
   private Emotion getDummyEmotion(String Content) {
     try {
       Thread.sleep(2000L);

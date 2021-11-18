@@ -13,4 +13,5 @@ public interface WebClientDispatcher {
 
   String authenticateAndGetUserId(String token);
   Emotion getEmotionByDiaryContent(String content);
+  void setEmotionByDiaryId(String diaryId, Emotion emotion);
 }

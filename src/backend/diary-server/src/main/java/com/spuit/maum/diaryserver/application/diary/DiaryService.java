@@ -1,6 +1,7 @@
 package com.spuit.maum.diaryserver.application.diary;
 
 import com.spuit.maum.diaryserver.application.ApplicationService;
+import com.spuit.maum.diaryserver.web.request.Diary.DiaryEmotionCustomRequest;
 import com.spuit.maum.diaryserver.web.request.Diary.DiaryWriteRequest;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryCalenderResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryWriteResponse;
@@ -15,4 +16,6 @@ public interface DiaryService extends ApplicationService {
   DiaryWriteResponse write(String userId, DiaryWriteRequest diaryWriteRequest);
 
   DiaryCalenderResponse getCalenderDiaryList(String userId, Integer year, Integer month);
+
+  void setDiaryCustomEmotion(String userId, DiaryEmotionCustomRequest diaryEmotionCustomRequest);
 }

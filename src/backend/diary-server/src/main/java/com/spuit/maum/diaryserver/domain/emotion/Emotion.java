@@ -3,9 +3,11 @@ package com.spuit.maum.diaryserver.domain.emotion;
 import java.lang.reflect.Field;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 @Builder
 @Getter
+@ToString
 public class Emotion {
 
   private String topEmotion;
@@ -22,6 +24,11 @@ public class Emotion {
   private final Integer embarrassment;
   private final Integer unrest;
   private final Integer bruise;
+
+  public Emotion setTopEmotion(String topEmotion) {
+    this.topEmotion = topEmotion;
+    return this;
+  }
 
   public Emotion setTopEmotionValue() {
     Field[] fields = this.getClass().getDeclaredFields();
@@ -52,6 +59,22 @@ public class Emotion {
         }
         this.topEmotion = f.getName();
         break;
+      }
+    } catch (IllegalAccessException ex) {
+      throw new RuntimeException();
+    }
+    return this;
+  }
+
+  public Emotion resetTopEmotionValue() {
+    Field[] fields = this.getClass().getDeclaredFields();
+    try {
+      for (Field f : fields) {
+        f.setAccessible(true);
+        if (f.getName().equals(topEmotion)) {
+          f.set(this, -(int) f.get(this));
+          break;
+        }
       }
     } catch (IllegalAccessException ex) {
       throw new RuntimeException();
