@@ -8,6 +8,7 @@ import com.spuit.maum.diaryserver.web.request.Diary.DiaryWriteRequest;
 import com.spuit.maum.diaryserver.web.response.ApiResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryCalenderResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryCardResponse;
+import com.spuit.maum.diaryserver.web.response.Diary.DiaryDetailResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryTimelineResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryWriteResponse;
 import lombok.RequiredArgsConstructor;
@@ -102,7 +103,8 @@ public class DiaryController {
       @ApiIgnore @RequestParam(required = false) @AuthenticationParameter String userId,
       @PathVariable Integer year, @PathVariable Integer month, @PathVariable Integer day) {
 
-
-    return ApiResponse.defaultOk(null);
+    DiaryDetailResponse diaryDetailResponse = diaryService.findDiaryDetailByUserIdAndDate(userId,
+        year, month, day);
+    return ApiResponse.defaultOk(diaryDetailResponse);
   }
 }

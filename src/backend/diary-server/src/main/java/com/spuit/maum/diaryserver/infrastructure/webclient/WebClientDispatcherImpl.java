@@ -5,7 +5,10 @@ import com.spuit.maum.diaryserver.domain.common.exception.UnauthorizedException;
 import com.spuit.maum.diaryserver.domain.diary.Emotion;
 import com.spuit.maum.diaryserver.domain.diary.Music;
 import com.spuit.maum.diaryserver.web.response.ApiResponse;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -72,6 +75,15 @@ public class WebClientDispatcherImpl implements WebClientDispatcher {
   @Override
   public Emotion findEmotionByDiaryId(String diaryId) {
     return getDummyEmotion(diaryId);
+  }
+
+  @Override
+  public List<Music> findAllMusicByDiaryId(String diaryId) {
+    List<Music> musicList = new ArrayList<>(3);
+    for (int i = 0; i < 3 ; i++) {
+      musicList.add(getDummyMusic(diaryId));
+    }
+    return musicList;
   }
 
   private Music getDummyMusic(String diaryId) {

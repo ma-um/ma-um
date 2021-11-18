@@ -4,9 +4,11 @@ import com.spuit.maum.diaryserver.domain.diary.Emotion;
 import com.spuit.maum.diaryserver.domain.diary.Music;
 import java.time.LocalDate;
 import java.util.List;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
+@Builder
 public class DiaryDetailResponse {
 
   LocalDate date;

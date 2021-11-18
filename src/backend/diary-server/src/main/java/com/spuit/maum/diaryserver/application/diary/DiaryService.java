@@ -5,6 +5,7 @@ import com.spuit.maum.diaryserver.web.request.Diary.DiaryEmotionCustomRequest;
 import com.spuit.maum.diaryserver.web.request.Diary.DiaryWriteRequest;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryCalenderResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryCardResponse;
+import com.spuit.maum.diaryserver.web.response.Diary.DiaryDetailResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryTimelineResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryWriteResponse;
 
@@ -25,4 +26,7 @@ public interface DiaryService extends ApplicationService {
       Integer date);
 
   DiaryTimelineResponse findTimelineByUserId(String userId);
+
+  DiaryDetailResponse findDiaryDetailByUserIdAndDate(String userId, Integer year, Integer month,
+      Integer date);
 }

@@ -10,6 +10,7 @@ import com.spuit.maum.diaryserver.web.request.Diary.DiaryEmotionCustomRequest;
 import com.spuit.maum.diaryserver.web.request.Diary.DiaryWriteRequest;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryCalenderResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryCardResponse;
+import com.spuit.maum.diaryserver.web.response.Diary.DiaryDetailResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryTimelineResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryWriteResponse;
 import java.time.LocalDate;
@@ -98,6 +99,24 @@ public class DiaryServiceImpl implements DiaryService {
         diaryCardList.add(createDiaryCard(diary))
     );
     return new DiaryTimelineResponse(diaryCardList);
+  }
+
+  @Override
+  public DiaryDetailResponse findDiaryDetailByUserIdAndDate(String userId, Integer year,
+      Integer month, Integer date) {
+    LocalDateTime first = LocalDate.of(year, month, date).atStartOfDay();
+    LocalDateTime last = first.toLocalDate().atTime(23, 59, 59);
+
+    Diary diary =
+        diaryRepository.findByUserIdAndRegistrationDateBetween(userId,
+            first, last).orElseThrow(() -> new ResourceNotFoundException("date", Diary.class,
+            first.toLocalDate().toString()));
+
+    Emotion emotion = webClientDispatcher.findEmotionByDiaryId(diary.getId());
+    List<Music> musicList = webClientDispatcher.findAllMusicByDiaryId(diary.getId());
+
+    return DiaryDetailResponse.builder().date(first.toLocalDate()).musicList(musicList)
+        .content(diary.getContent()).emotions(emotion).subject(diary.getTitle()).build();
   }
 
   private DiaryCardResponse createDiaryCard(Diary diary) {
