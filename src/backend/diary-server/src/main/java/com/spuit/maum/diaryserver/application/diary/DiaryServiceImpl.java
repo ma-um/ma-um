@@ -8,8 +8,6 @@ import com.spuit.maum.diaryserver.web.request.Diary.DiaryWriteRequest;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryCalenderResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryWriteResponse;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +31,8 @@ public class DiaryServiceImpl implements DiaryService {
   public DiaryWriteResponse write(String userId, DiaryWriteRequest diaryWriteRequest) {
     Diary diary =
         Diary.builder().title(diaryWriteRequest.getSubject()).userId(userId)
-            .content(diaryWriteRequest.getContent()).build();
+            .content(diaryWriteRequest.getContent())
+            .registrationDate(diaryWriteRequest.getDate().atStartOfDay()).build();
     diaryRepository.save(diary);
     Emotion responseEmotion =
         webClientDispatcher.getEmotionByDiaryContent(diaryWriteRequest.getContent());
@@ -45,7 +44,7 @@ public class DiaryServiceImpl implements DiaryService {
     LocalDate monthFirstDate = LocalDate.of(year, month, 1);
     LocalDate monthLastDate = monthFirstDate.with(TemporalAdjusters.lastDayOfMonth());
     List<Diary> diaryList =
-        diaryRepository.findAllByRegistrationDateBetween(monthFirstDate.atStartOfDay(),
+        diaryRepository.findAllByRegistrationDateBetweenOrderByRegistrationDate(monthFirstDate.atStartOfDay(),
             monthLastDate.atTime(23, 59, 59));
 
     return new DiaryCalenderResponse(diaryList);

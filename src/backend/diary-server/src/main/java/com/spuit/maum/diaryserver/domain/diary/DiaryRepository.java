@@ -13,5 +13,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 1.0.0
  */
 public interface DiaryRepository extends JpaRepository<Diary, String> {
-  List<Diary> findAllByRegistrationDateBetween(LocalDateTime first, LocalDateTime last);
+  List<Diary> findAllByRegistrationDateBetweenOrderByRegistrationDate(LocalDateTime first, LocalDateTime last);
 }

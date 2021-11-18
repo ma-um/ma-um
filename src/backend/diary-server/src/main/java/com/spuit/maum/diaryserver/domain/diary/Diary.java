@@ -9,6 +9,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 /**
  * Diary 애그리거트 루트 도메인.
@@ -19,8 +20,7 @@ import lombok.ToString;
 
 @DomainModel
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@SuperBuilder
 @Getter
 @ToString(callSuper = true)
 @Entity
