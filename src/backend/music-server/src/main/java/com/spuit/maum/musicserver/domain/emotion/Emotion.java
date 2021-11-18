@@ -24,6 +24,10 @@ import lombok.ToString;
 @ToString
 @Entity
 public class Emotion {
+  /*
+
+    Id는 diary, music의 id를 참조
+   */
   @Id
   String id;
   Integer type;
@@ -39,4 +43,6 @@ public class Emotion {
   Integer embarrassment;
   Integer unrest;
   Integer bruise;
+
+
 }

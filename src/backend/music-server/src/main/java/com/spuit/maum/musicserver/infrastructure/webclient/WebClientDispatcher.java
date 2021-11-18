@@ -1,7 +1,7 @@
 package com.spuit.maum.musicserver.infrastructure.webclient;
 
 import com.spuit.maum.musicserver.web.request.MusicRecommendationRequest;
-import com.spuit.maum.musicserver.web.response.DiaryEmotionResponse;
+import com.spuit.maum.musicserver.web.response.emotion.DiaryEmotionResponse;
 import com.spuit.maum.musicserver.web.response.Music.MusicRecommendationResponse;
 
 /**

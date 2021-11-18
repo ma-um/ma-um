@@ -1,4 +1,4 @@
-package com.spuit.maum.musicserver.web.response;
+package com.spuit.maum.musicserver.web.response.emotion;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.spuit.maum.musicserver.web.request;
 
-import com.spuit.maum.musicserver.domain.emotion.Emotion;
+import com.spuit.maum.musicserver.domain.emotion.EmotionDto;
 import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,6 +8,6 @@ import lombok.Getter;
 @Getter
 @Builder
 public class MusicRecommendationRequest {
-  Emotion emotions;
+  EmotionDto emotions;
   List<Integer> existedMusicIdList;
 }
