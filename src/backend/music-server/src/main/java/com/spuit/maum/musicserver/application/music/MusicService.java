@@ -16,4 +16,6 @@ public interface MusicService extends ApplicationService {
   GetMusicListResponse getMusicList(String diaryId);
 
   GetMusicListResponse setRecommendationMusicList(String diaryId, EmotionDto emotiondto);
+
+  GetMusicListResponse getMusicListByUserId(String userId);
 }

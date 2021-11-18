@@ -25,6 +25,8 @@ public class WebClientDispatcherImpl implements WebClientDispatcher {
   private String authUrl = "http://localhost:8091/api/v1/user";
   //  @Value("${url.emotion.base}")
   private String djangoServerBaseUrl = "http://localhost:8092/api/v1/";
+
+  private String diaryServer = "htttp://localhost:8092/api/v1/diary";
   private String emotionUrl = "emotion/diary2emotion";
   private String recommendationUrl = "recommendation/music_recommendation";
 
@@ -103,6 +105,27 @@ public class WebClientDispatcherImpl implements WebClientDispatcher {
     } catch (Exception e) {
       e.printStackTrace();
       throw new RuntimeException(e.getMessage());
+    }
+  }
+  @Override
+  public List<String> getAllDiaryByUserId(String userId) {
+    String uri = diaryServer + "/" + userId;
+
+    try {
+      ApiResponse<?> response = webClient
+          .get()
+          .uri(uri)
+          .accept(MediaType.APPLICATION_JSON)
+          .retrieve()
+          .bodyToMono(ApiResponse.class)
+          .block();
+
+      log.info("response - {}", response);
+
+      return (List<String>) response.getData();
+    } catch (WebClientResponseException ex) {
+
+      throw new RuntimeException(ex.getMessage());
     }
   }
 }

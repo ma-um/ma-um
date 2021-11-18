@@ -8,6 +8,7 @@ import com.spuit.maum.diaryserver.web.response.Diary.DiaryCardResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryDetailResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryTimelineResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryWriteResponse;
+import java.util.List;
 
 /**
  * Diary 관련 Application Service. 비즈니스 서비스 로직을 작성한다.
@@ -29,4 +30,6 @@ public interface DiaryService extends ApplicationService {
 
   DiaryDetailResponse findDiaryDetailByUserIdAndDate(String userId, Integer year, Integer month,
       Integer date);
+
+  List<String> getAllDiaryByUserId(String userId);
 }

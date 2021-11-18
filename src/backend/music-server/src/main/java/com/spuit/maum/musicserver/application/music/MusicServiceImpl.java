@@ -67,4 +67,18 @@ public class MusicServiceImpl implements MusicService {
 
     return new GetMusicListResponse(musicDtoList);
   }
+
+  @Override
+  public GetMusicListResponse getMusicListByUserId(String userId) {
+    List<String> diaryIdList = webClientDispatcher.getAllDiaryByUserId(userId);
+    List<Long> musicIdList =
+        diaryMusicRepository.findAllByDiaryIdInOrderByRegistrationDate(diaryIdList).stream()
+            .map(DiaryMusic::getMusicId).distinct().collect(
+            Collectors.toList());
+    List<MusicDto> musicDtoList =
+        musicRepository.findDistinctByIdIn(musicIdList).stream().map(MusicDto::of)
+            .collect(
+                Collectors.toList());
+    return new GetMusicListResponse(musicDtoList);
+  }
 }

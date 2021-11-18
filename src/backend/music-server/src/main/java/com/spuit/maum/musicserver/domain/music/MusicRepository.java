@@ -10,4 +10,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 1.0.0
  */
 public interface MusicRepository extends JpaRepository<Music, Long> {
+  List<Music> findDistinctByIdIn(List<Long> id);
 }

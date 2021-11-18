@@ -1,5 +1,6 @@
 package com.spuit.maum.diaryserver.application.diary;
 
+import com.spuit.maum.diaryserver.domain.common.BaseEntity;
 import com.spuit.maum.diaryserver.domain.common.exception.ResourceNotFoundException;
 import com.spuit.maum.diaryserver.domain.diary.Diary;
 import com.spuit.maum.diaryserver.domain.diary.DiaryRepository;
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -117,6 +119,18 @@ public class DiaryServiceImpl implements DiaryService {
 
     return DiaryDetailResponse.builder().date(first.toLocalDate()).musicList(musicList)
         .content(diary.getContent()).emotions(emotion).subject(diary.getTitle()).build();
+  }
+
+  /*
+
+    querydsl로 리팩토링
+   */
+  @Override
+  public List<String> getAllDiaryByUserId(String userId) {
+
+    return diaryRepository.findAllByUserIdOrderByRegistrationDate(userId).stream().map(
+        BaseEntity::getId).collect(
+        Collectors.toList());
   }
 
   private DiaryCardResponse createDiaryCard(Diary diary) {

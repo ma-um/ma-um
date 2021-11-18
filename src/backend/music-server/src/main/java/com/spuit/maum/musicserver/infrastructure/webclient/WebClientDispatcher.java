@@ -1,6 +1,7 @@
 package com.spuit.maum.musicserver.infrastructure.webclient;
 
 import com.spuit.maum.musicserver.web.response.emotion.DiaryEmotionResponse;
+import java.util.List;
 
 /**
  * Rest 클라이언트 통신을 위한 서비스.
@@ -16,5 +17,7 @@ public interface WebClientDispatcher {
 
   MusicRecommendationWebClientResponse musicRecommendation(
       MusicRecommendationRequest musicRecommendationRequest);
+
+  List<String> getAllDiaryByUserId(String userId);
 
 }

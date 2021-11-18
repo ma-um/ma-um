@@ -107,4 +107,10 @@ public class DiaryController {
         year, month, day);
     return ApiResponse.defaultOk(diaryDetailResponse);
   }
+
+  @GetMapping("/{userId}")
+  public ApiResponse<?> getAllDiaryByUserId(@PathVariable String userId) {
+
+    return ApiResponse.defaultOk(diaryService.getAllDiaryByUserId(userId));
+  }
 }

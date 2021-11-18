@@ -9,4 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface DiaryMusicRepository extends JpaRepository<DiaryMusic, Long> {
   List<DiaryMusic> findAllByDiaryId(String diaryId);
+  List<DiaryMusic> findAllByDiaryIdInOrderByRegistrationDate(List<String> diaryId);
 }

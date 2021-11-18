@@ -56,6 +56,8 @@ public class MusicController {
       @ApiIgnore @AuthenticationParameter @RequestHeader(name =
           HttpHeaders.AUTHORIZATION) String token,
       @ApiIgnore @RequestParam(required = false) @AuthenticationParameter String userId) {
-    return null;
+
+    GetMusicListResponse getMusicListResponse = musicService.getMusicListByUserId(userId);
+    return ApiResponse.defaultOk(getMusicListResponse);
   }
 }

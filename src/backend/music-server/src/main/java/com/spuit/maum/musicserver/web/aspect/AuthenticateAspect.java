@@ -51,6 +51,7 @@ public class AuthenticateAspect {
     } catch (UnauthorizedException unauthorizedException) {
       throw unauthorizedException;
     } catch (Exception exception) {
+      exception.printStackTrace();
       throw new IllegalArgumentException("invalid authorization header");
     }
     return joinPoint.proceed(args);
