@@ -3,14 +3,20 @@ package com.spuit.maum.diaryserver.application.diary;
 import com.spuit.maum.diaryserver.domain.common.exception.ResourceNotFoundException;
 import com.spuit.maum.diaryserver.domain.diary.Diary;
 import com.spuit.maum.diaryserver.domain.diary.DiaryRepository;
-import com.spuit.maum.diaryserver.domain.emotion.Emotion;
+import com.spuit.maum.diaryserver.domain.diary.Emotion;
+import com.spuit.maum.diaryserver.domain.diary.Music;
 import com.spuit.maum.diaryserver.infrastructure.webclient.WebClientDispatcher;
 import com.spuit.maum.diaryserver.web.request.Diary.DiaryEmotionCustomRequest;
 import com.spuit.maum.diaryserver.web.request.Diary.DiaryWriteRequest;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryCalenderResponse;
+import com.spuit.maum.diaryserver.web.response.Diary.DiaryCardResponse;
+import com.spuit.maum.diaryserver.web.response.Diary.DiaryDetailResponse;
+import com.spuit.maum.diaryserver.web.response.Diary.DiaryTimelineResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryWriteResponse;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
+import java.util.LinkedList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -43,7 +49,7 @@ public class DiaryServiceImpl implements DiaryService {
   }
 
   @Override
-  public DiaryCalenderResponse getCalenderDiaryList(String userId, Integer year, Integer month) {
+  public DiaryCalenderResponse findCalenderDiaryList(String userId, Integer year, Integer month) {
     LocalDate monthFirstDate = LocalDate.of(year, month, 1);
     LocalDate monthLastDate = monthFirstDate.with(TemporalAdjusters.lastDayOfMonth());
     List<Diary> diaryList =
@@ -69,5 +75,54 @@ public class DiaryServiceImpl implements DiaryService {
     webClientDispatcher.setEmotionByDiaryId(diary.getId(),
         diaryEmotionCustomRequest.getEmotions()
             .setTopEmotion(diaryEmotionCustomRequest.getTopEmotion()).setTopEmotionValue());
+  }
+
+  @Override
+  public DiaryCardResponse findDiaryCardByUserIdAndDate(String userId, Integer year, Integer month,
+      Integer date) {
+    LocalDateTime first = LocalDate.of(year, month, date).atStartOfDay();
+    LocalDateTime last = first.toLocalDate().atTime(23, 59, 59);
+
+    Diary diary =
+        diaryRepository.findByUserIdAndRegistrationDateBetween(userId,
+            first, last).orElseThrow(() -> new ResourceNotFoundException("date", Diary.class,
+            first.toLocalDate().toString()));
+
+    return createDiaryCard(diary);
+  }
+
+  @Override
+  public DiaryTimelineResponse findTimelineByUserId(String userId) {
+    List<Diary> diaryList = diaryRepository.findAllByUserIdOrderByRegistrationDate(userId);
+    List<DiaryCardResponse> diaryCardList = new LinkedList<>();
+    diaryList.forEach(diary ->
+        diaryCardList.add(createDiaryCard(diary))
+    );
+    return new DiaryTimelineResponse(diaryCardList);
+  }
+
+  @Override
+  public DiaryDetailResponse findDiaryDetailByUserIdAndDate(String userId, Integer year,
+      Integer month, Integer date) {
+    LocalDateTime first = LocalDate.of(year, month, date).atStartOfDay();
+    LocalDateTime last = first.toLocalDate().atTime(23, 59, 59);
+
+    Diary diary =
+        diaryRepository.findByUserIdAndRegistrationDateBetween(userId,
+            first, last).orElseThrow(() -> new ResourceNotFoundException("date", Diary.class,
+            first.toLocalDate().toString()));
+
+    Emotion emotion = webClientDispatcher.findEmotionByDiaryId(diary.getId());
+    List<Music> musicList = webClientDispatcher.findAllMusicByDiaryId(diary.getId());
+
+    return DiaryDetailResponse.builder().date(first.toLocalDate()).musicList(musicList)
+        .content(diary.getContent()).emotions(emotion).subject(diary.getTitle()).build();
+  }
+
+  private DiaryCardResponse createDiaryCard(Diary diary) {
+    Emotion emotion = webClientDispatcher.findEmotionByDiaryId(diary.getId());
+    Music music = webClientDispatcher.findMusicByDiaryId(diary.getId());
+
+    return new DiaryCardResponse(diary, music, emotion.getTopEmotion());
   }
 }

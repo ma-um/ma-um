@@ -7,6 +7,9 @@ import com.spuit.maum.diaryserver.web.request.Diary.DiaryEmotionCustomRequest;
 import com.spuit.maum.diaryserver.web.request.Diary.DiaryWriteRequest;
 import com.spuit.maum.diaryserver.web.response.ApiResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryCalenderResponse;
+import com.spuit.maum.diaryserver.web.response.Diary.DiaryCardResponse;
+import com.spuit.maum.diaryserver.web.response.Diary.DiaryDetailResponse;
+import com.spuit.maum.diaryserver.web.response.Diary.DiaryTimelineResponse;
 import com.spuit.maum.diaryserver.web.response.Diary.DiaryWriteResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -54,7 +57,7 @@ public class DiaryController {
       @ApiIgnore @RequestParam(required = false) @AuthenticationParameter String userId,
       @PathVariable Integer year, @PathVariable Integer month) {
 
-    DiaryCalenderResponse diaryCalenderResponse = diaryService.getCalenderDiaryList(userId, year,
+    DiaryCalenderResponse diaryCalenderResponse = diaryService.findCalenderDiaryList(userId, year,
         month);
     return ApiResponse.defaultOk(diaryCalenderResponse);
   }
@@ -70,4 +73,38 @@ public class DiaryController {
     return ApiResponse.defaultOk(null);
   }
 
+  @GetMapping("/card/{year}/{month}/{day}")
+  public ApiResponse<?> getDiaryCard(
+      @ApiIgnore @AuthenticationParameter @RequestHeader(name =
+          HttpHeaders.AUTHORIZATION) String token,
+      @ApiIgnore @RequestParam(required = false) @AuthenticationParameter String userId,
+      @PathVariable Integer year, @PathVariable Integer month, @PathVariable Integer day) {
+
+    DiaryCardResponse diaryCardResponse = diaryService.findDiaryCardByUserIdAndDate(userId, year,
+        month, day);
+    return ApiResponse.defaultOk(diaryCardResponse);
+  }
+
+  @GetMapping("/timeline")
+  public ApiResponse<?> getTimelineList(
+      @ApiIgnore @AuthenticationParameter @RequestHeader(name =
+          HttpHeaders.AUTHORIZATION) String token,
+      @ApiIgnore @RequestParam(required = false) @AuthenticationParameter String userId
+  ) {
+    DiaryTimelineResponse diaryTimelineResponse = diaryService.findTimelineByUserId(userId);
+
+    return ApiResponse.defaultOk(diaryTimelineResponse);
+  }
+
+  @GetMapping("/detail/{year}/{month}/{day}")
+  public ApiResponse<?> diaryDetails(
+      @ApiIgnore @AuthenticationParameter @RequestHeader(name =
+          HttpHeaders.AUTHORIZATION) String token,
+      @ApiIgnore @RequestParam(required = false) @AuthenticationParameter String userId,
+      @PathVariable Integer year, @PathVariable Integer month, @PathVariable Integer day) {
+
+    DiaryDetailResponse diaryDetailResponse = diaryService.findDiaryDetailByUserIdAndDate(userId,
+        year, month, day);
+    return ApiResponse.defaultOk(diaryDetailResponse);
+  }
 }

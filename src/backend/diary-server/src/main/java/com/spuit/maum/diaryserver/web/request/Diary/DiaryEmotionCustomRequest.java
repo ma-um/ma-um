@@ -1,6 +1,6 @@
 package com.spuit.maum.diaryserver.web.request.Diary;
 
-import com.spuit.maum.diaryserver.domain.emotion.Emotion;
+import com.spuit.maum.diaryserver.domain.diary.Emotion;
 import java.time.LocalDate;
 import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
