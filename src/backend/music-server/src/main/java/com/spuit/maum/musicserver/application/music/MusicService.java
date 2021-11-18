@@ -13,5 +13,7 @@ import com.spuit.maum.musicserver.web.response.Music.GetMusicListResponse;
  */
 public interface MusicService extends ApplicationService {
 
+  GetMusicListResponse getMusicList(String diaryId);
+
   GetMusicListResponse setRecommendationMusicList(String diaryId, EmotionDto emotiondto);
 }

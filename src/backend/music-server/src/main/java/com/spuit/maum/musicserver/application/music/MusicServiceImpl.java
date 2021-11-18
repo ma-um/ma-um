@@ -14,6 +14,7 @@ import com.spuit.maum.musicserver.web.response.Music.GetMusicListResponse;
 import io.swagger.models.auth.In;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,15 @@ public class MusicServiceImpl implements MusicService {
   private final DiaryMusicRepository diaryMusicRepository;
 
   private final WebClientDispatcher webClientDispatcher;
+
+  @Override
+  public GetMusicListResponse getMusicList(String diaryId) {
+    List<MusicDto> musicDtoList =
+        diaryMusicRepository.findAllByDiaryId(diaryId).stream()
+            .map(diaryMusic -> MusicDto.of(musicRepository.getById(diaryMusic.getMusicId())))
+            .collect(Collectors.toList());
+    return new GetMusicListResponse(musicDtoList);
+  }
 
   @Override
   public GetMusicListResponse setRecommendationMusicList(String diaryId, EmotionDto emotionDto) {
