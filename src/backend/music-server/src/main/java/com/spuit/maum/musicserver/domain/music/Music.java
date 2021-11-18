@@ -14,6 +14,8 @@ import lombok.ToString;
 /**
  * Music 애그리거트 루트 도메인.
  *
+ * emotion 연관관계 테이블로 리팩토링 필요
+ *
  * @author cherrytomato1
  * @version 1.0.0
  */

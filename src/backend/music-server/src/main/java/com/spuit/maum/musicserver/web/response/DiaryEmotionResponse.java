@@ -1,8 +1,6 @@
-package com.spuit.maum.musicserver.infrastructure.webclient;
+package com.spuit.maum.musicserver.web.response;
 
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Builder;

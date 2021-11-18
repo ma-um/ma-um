@@ -2,6 +2,7 @@ package com.spuit.maum.musicserver.infrastructure.webclient;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.spuit.maum.musicserver.web.response.DiaryEmotionResponse;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;

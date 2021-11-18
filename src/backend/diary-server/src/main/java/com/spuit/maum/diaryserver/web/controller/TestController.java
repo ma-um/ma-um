@@ -1,9 +1,9 @@
-package com.spuit.maum.musicserver.web.controller;
+package com.spuit.maum.diaryserver.web.controller;
 
-import com.spuit.maum.musicserver.web.request.MusicRecommendationRequest;
-import com.spuit.maum.musicserver.web.response.DiaryEmotionResponse;
-import com.spuit.maum.musicserver.infrastructure.webclient.WebClientDispatcher;
-import com.spuit.maum.musicserver.web.response.Music.MusicRecommendationResponse;
+import com.spuit.maum.diaryserver.infrastructure.webclient.WebClientDispatcher;
+import com.spuit.maum.diaryserver.web.controller.MusicRecommendationResponse.MusicId;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,21 +28,15 @@ public class TestController {
     return ResponseEntity.of(Optional.of(diaryEmotionResponse));
   }
 
-
-  @PostMapping("api/v1/test2")
-  public ResponseEntity<?> test2(@RequestBody String content) {
-
-    DiaryEmotionResponse diaryEmotionResponse = webClientDispatcher.diary2EmotionRequest(content);
-
-    return ResponseEntity.of(Optional.of(diaryEmotionResponse));
-  }
-
-  @PostMapping("api/v1/test3")
-  public ResponseEntity<?> test3(@RequestBody MusicRecommendationRequest musicRecommendationRequest) {
-
-    MusicRecommendationResponse musicRecommendationResponse = webClientDispatcher
-        .musicRecommendation(musicRecommendationRequest);
-
+  @PostMapping("api/v1/recommendation/music_recommendation")
+  public ResponseEntity<?> test2(
+      @RequestBody MusicRecommendationRequest musicRecommendationRequest) {
+    MusicRecommendationResponse musicRecommendationResponse =
+        new MusicRecommendationResponse(new LinkedList<>());
+    musicRecommendationResponse.getMusicIdList().add(new MusicId(231));
+    musicRecommendationResponse.getMusicIdList().add(new MusicId(444));
+    musicRecommendationResponse.getMusicIdList().add(new MusicId(121));
     return ResponseEntity.of(Optional.of(musicRecommendationResponse));
+
   }
 }
