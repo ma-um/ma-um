@@ -20,7 +20,7 @@ spring:
 server:
   port: 8093
 
-server-url:
+url:
   auth:
     base: http://localhost:8091/api/v1/user
   diary:
