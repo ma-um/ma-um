@@ -48,6 +48,14 @@ dependencies {
     implementation("io.springfox:springfox-data-rest:3.0.0")
     implementation("io.springfox:springfox-bean-validators:3.0.0")
     implementation("io.springfox:springfox-boot-starter:3.0.0")
+
+    //web-flux
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-webflux', version: '2.5.6'
+
+    testImplementation group: 'com.squareup.okhttp3', name: 'mockwebserver', version: '4.0.1'
+    testImplementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.0.1'
+
+
 }
 
 jacoco {
@@ -68,8 +76,8 @@ jacocoTestReport {
     }
 
     def Qdomains = []
-    for(qPattern in "**/QA" .. "**/QZ"){
-        Qdomains.add(qPattern+"*")
+    for (qPattern in "**/QA".."**/QZ") {
+        Qdomains.add(qPattern + "*")
     }
 
     afterEvaluate {

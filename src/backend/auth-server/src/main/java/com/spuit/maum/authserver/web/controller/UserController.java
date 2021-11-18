@@ -52,7 +52,7 @@ public class UserController {
     return ApiResponse.defaultOk(user.getOauthId());
   }
 
-  @GetMapping("/")
+  @GetMapping("")
   public ApiResponse<?> authenticateTokenAndGetUserId(
       @RequestHeader("Authorization") @AuthenticationParameter @ApiIgnore String token) {
 
@@ -64,5 +64,4 @@ public class UserController {
     }
     return ApiResponse.defaultOk(new AuthenticateResponse(user.getId()));
   }
-
 }
