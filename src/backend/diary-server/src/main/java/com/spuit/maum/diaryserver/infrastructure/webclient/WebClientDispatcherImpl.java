@@ -1,5 +1,7 @@
 package com.spuit.maum.diaryserver.infrastructure.webclient;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.net.HttpHeaders;
 import com.spuit.maum.diaryserver.domain.common.exception.UnauthorizedException;
 import com.spuit.maum.diaryserver.domain.diary.Emotion;
@@ -22,8 +24,13 @@ public class WebClientDispatcherImpl implements WebClientDispatcher {
 
   private final WebClient webClient;
 
+  private final ObjectMapper mapper = new ObjectMapper();
+
   //  @Value("${url.auth.base}")
   private String authUrl = "http://localhost:8091/api/v1/user";
+
+  private String musicUrl = "http://localhost:8093/api/v1/music";
+  private String emotionUrl = "http://localhost:8093/api/v1/emotion";
 
   public WebClientDispatcherImpl(WebClient.Builder builder) {
     this.webClient = builder.build();
@@ -54,17 +61,49 @@ public class WebClientDispatcherImpl implements WebClientDispatcher {
 
   @Override
   public Emotion getEmotionByDiaryContent(String content) {
+    String uri = emotionUrl + "/analysis";
+    log.info("analysis uri - {}", uri);
+
     try {
-      Thread.sleep(2000L);
-    } catch (InterruptedException ex) {
-      ex.printStackTrace();
+      ApiResponse<?> response = webClient
+          .post()
+          .uri(uri)
+          .bodyValue(content)
+          .accept(MediaType.APPLICATION_JSON)
+          .retrieve()
+          .bodyToMono(ApiResponse.class)
+          .block();
+
+      log.info("response - {}", response);
+      Map<String, Object> result = (Map<String, Object>)response.getData();
+      return mapper.convertValue(result.get("emotion"), Emotion.class);
+    } catch (WebClientResponseException ex) {
+      throw new RuntimeException(ex.getMessage());
     }
-    return getDummyEmotion(content);
   }
 
   @Override
   public void setEmotionByDiaryId(String diaryId, Emotion emotion) {
-    log.info("diary id - {} , emotion - {}", diaryId, emotion);
+    String uri = emotionUrl + "/" + diaryId;
+    log.info("analysis uri - {}", uri);
+
+    try {
+      ApiResponse<?> response = webClient
+          .post()
+          .uri(uri)
+          .bodyValue(new SetCustomEmotionRequest(emotion))
+          .accept(MediaType.APPLICATION_JSON)
+          .retrieve()
+          .bodyToMono(ApiResponse.class)
+          .block();
+
+      log.info("response - {}", response);
+
+      setRecommendationMusic(diaryId);
+
+    } catch (WebClientResponseException ex) {
+      throw new RuntimeException(ex.getMessage());
+    }
   }
 
   @Override
@@ -74,16 +113,48 @@ public class WebClientDispatcherImpl implements WebClientDispatcher {
 
   @Override
   public Emotion findEmotionByDiaryId(String diaryId) {
-    return getDummyEmotion(diaryId);
+    String uri = emotionUrl + "/" + diaryId;
+    log.info("find emotion uri - {}", uri);
+
+    try {
+      ApiResponse<?> response = webClient
+          .get()
+          .uri(uri)
+          .accept(MediaType.APPLICATION_JSON)
+          .retrieve()
+          .bodyToMono(ApiResponse.class)
+          .block();
+
+      log.info("response - {}", response);
+      Map<String, Object> result = (Map<String, Object>)response.getData();
+      return mapper.convertValue(result.get("emotion"), Emotion.class).resetTopEmotionValue();
+    } catch (WebClientResponseException ex) {
+      throw new RuntimeException(ex.getMessage());
+    }
   }
 
   @Override
   public List<Music> findAllMusicByDiaryId(String diaryId) {
-    List<Music> musicList = new ArrayList<>(3);
-    for (int i = 0; i < 3 ; i++) {
-      musicList.add(getDummyMusic(diaryId));
+    String uri = musicUrl + "/" + diaryId;
+    log.info("find emotion uri - {}", uri);
+
+    try {
+      ApiResponse<?> response = webClient
+          .get()
+          .uri(uri)
+          .accept(MediaType.APPLICATION_JSON)
+          .retrieve()
+          .bodyToMono(ApiResponse.class)
+          .block();
+
+      log.info("response - {}", response);
+      Object data =((Map<String, Object>)response.getData()).get("musicList");
+      List<Music> result = mapper.convertValue(data,
+          new TypeReference<List<Music>>(){});
+      return result;
+    } catch (WebClientResponseException ex) {
+      throw new RuntimeException(ex.getMessage());
     }
-    return musicList;
   }
 
   private Music getDummyMusic(String diaryId) {
@@ -97,5 +168,28 @@ public class WebClientDispatcherImpl implements WebClientDispatcher {
     return Emotion.builder().fear(3).anger(5).disgust(30).bruise(20).embarrassment(22).happiness(55)
         .neutrality(33).pleasure(50).sadness(32).surprise(12).unrest(55).build()
         .setDefaultTopEmotion().resetTopEmotionValue();
+  }
+
+  private void setRecommendationMusic(String diaryId){
+    String uri = musicUrl + "/recommendation/" + diaryId;
+    log.info("recommetation uri - {}", uri);
+
+    try {
+      ApiResponse<?> response = webClient
+          .get()
+          .uri(uri)
+          .accept(MediaType.APPLICATION_JSON)
+          .retrieve()
+          .bodyToMono(ApiResponse.class)
+          .block();
+
+      log.info("response - {}", response);
+      Object data =((Map<String, Object>)response.getData()).get("musicList");
+      List<Music> result = mapper.convertValue(data,
+          new TypeReference<List<Music>>(){});
+//      return result;
+    } catch (WebClientResponseException ex) {
+      throw new RuntimeException(ex.getMessage());
+    }
   }
 }
