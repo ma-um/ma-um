@@ -6,6 +6,6 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class AnalysisEmotionResponse {
+public class GetEmotionResponse {
   EmotionDto emotionDto;
 }

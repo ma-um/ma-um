@@ -5,7 +5,8 @@ import com.spuit.maum.musicserver.domain.emotion.Emotion;
 import com.spuit.maum.musicserver.domain.emotion.EmotionDto;
 import com.spuit.maum.musicserver.domain.emotion.EmotionRepository;
 import com.spuit.maum.musicserver.infrastructure.webclient.WebClientDispatcher;
-import com.spuit.maum.musicserver.web.response.emotion.AnalysisEmotionResponse;
+import com.spuit.maum.musicserver.web.request.emotion.SetCustomEmotionRequest;
+import com.spuit.maum.musicserver.web.response.emotion.GetEmotionResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,10 +25,27 @@ public class EmotionServiceImpl implements EmotionService {
   private final WebClientDispatcher webClientDispatcher;
 
   @Override
-  public AnalysisEmotionResponse analysisEmotionByContent(String content) {
-//    Emotion emotion =
-//        emotionRepository.findById(diaryId).orElseThrow(() -> new ResourceNotFoundException(
-//            "diaryId", Emotion.class, diaryId));
-    return new AnalysisEmotionResponse(EmotionDto.of(webClientDispatcher.diary2EmotionRequest(content).resultStringToList()));
+  public GetEmotionResponse analysisEmotionByContent(String content) {
+
+    return new GetEmotionResponse(
+        EmotionDto.of(webClientDispatcher.diary2EmotionRequest(content).resultStringToList()));
+  }
+
+  @Override
+  public GetEmotionResponse findEmotionByDiaryId(String diaryId) {
+    Emotion emotion =
+        emotionRepository.findById(diaryId).orElseThrow(() -> new ResourceNotFoundException(
+            "diaryId", Emotion.class, diaryId));
+    return new GetEmotionResponse(EmotionDto.of(emotion));
+  }
+
+  @Override
+  public void updateEmotionByDiaryId(String diaryId,
+      SetCustomEmotionRequest setCustomEmotionRequest) {
+    Emotion emotion =
+        emotionRepository.findById(diaryId).orElseThrow(() -> new ResourceNotFoundException(
+            "diaryId", Emotion.class, diaryId));
+    emotion.updateEmotion(setCustomEmotionRequest.getEmotion());
+    emotionRepository.save(emotion);
   }
 }

@@ -44,5 +44,17 @@ public class Emotion {
   Integer unrest;
   Integer bruise;
 
-
+  public void updateEmotion(EmotionDto emotionDto) {
+    this.fear = emotionDto.fear;
+    this.surprise = emotionDto.surprise;
+    this.anger = emotionDto.anger;
+    this.sadness = emotionDto.sadness;
+    this.neutrality = emotionDto.neutrality;
+    this.happiness = emotionDto.happiness;
+    this.disgust = emotionDto.disgust;
+    this.pleasure = emotionDto.pleasure;
+    this.embarrassment = emotionDto.embarrassment;
+    this.unrest = emotionDto.unrest;
+    this.bruise = emotionDto.bruise;
+  }
 }

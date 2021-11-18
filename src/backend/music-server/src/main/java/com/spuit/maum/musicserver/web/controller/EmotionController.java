@@ -3,7 +3,7 @@ package com.spuit.maum.musicserver.web.controller;
 import com.spuit.maum.musicserver.application.emotion.EmotionService;
 import com.spuit.maum.musicserver.web.request.emotion.SetCustomEmotionRequest;
 import com.spuit.maum.musicserver.web.response.ApiResponse;
-import com.spuit.maum.musicserver.web.response.emotion.AnalysisEmotionResponse;
+import com.spuit.maum.musicserver.web.response.emotion.GetEmotionResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,24 +21,28 @@ public class EmotionController {
 
   private final EmotionService emotionService;
 
-  @GetMapping("/analysis/{diaryId}")
-  public ApiResponse<?> analysisEmotion(@PathVariable String diaryId) {
+  @GetMapping("/analysis")
+  public ApiResponse<?> analysisEmotion(@RequestBody String content) {
 
-    AnalysisEmotionResponse analysisEmotionResponse = emotionService.analysisEmotionByContent(diaryId);
-    return null;
+    GetEmotionResponse getEmotionResponse = emotionService
+        .analysisEmotionByContent(content);
+    return ApiResponse.defaultOk(getEmotionResponse);
   }
 
   @GetMapping("/{diaryId}")
   public ApiResponse<?> loadEmotion(@PathVariable String diaryId) {
 
-    return null;
+    GetEmotionResponse getEmotionResponse = emotionService.findEmotionByDiaryId(diaryId);
+    return ApiResponse.defaultOk(getEmotionResponse);
   }
 
   @PostMapping("/{diaryId}")
   public ApiResponse<?> setCustomEmotion(@PathVariable String diaryId, @RequestBody
       SetCustomEmotionRequest setCustomEmotionRequest) {
 
-    return null;
+    emotionService.updateEmotionByDiaryId(diaryId, setCustomEmotionRequest);
+
+    return ApiResponse.defaultOk(null);
   }
 
 }
