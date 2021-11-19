@@ -1,0 +1,116 @@
+buildscript {
+    ext {
+        queryDslVersion = "4.4.0"
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '2.5.6'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'jacoco'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    //QueryDSL
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    annotationProcessor(
+            "javax.persistence:javax.persistence-api",
+            "javax.annotation:javax.annotation-api",
+            "com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
+
+    //swagger
+    implementation("io.springfox:springfox-swagger2:3.0.0")
+    implementation("io.springfox:springfox-swagger-ui:3.0.0")
+    implementation("io.springfox:springfox-data-rest:3.0.0")
+    implementation("io.springfox:springfox-bean-validators:3.0.0")
+    implementation("io.springfox:springfox-boot-starter:3.0.0")
+
+    //web-flux
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-webflux', version: '2.5.6'
+
+    testImplementation group: 'com.squareup.okhttp3', name: 'mockwebserver', version: '4.0.1'
+    testImplementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.0.1'
+
+}
+
+jacocoTestReport {
+    reports {
+        html.enabled true
+        xml.enabled false
+        csv.enabled false
+    }
+
+    def Qdomains = []
+    for(qPattern in "**/QA" .. "**/QZ"){
+        Qdomains.add(qPattern+"*")
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it,
+                    exclude: [] + Qdomains)
+        }))
+    }
+
+    finalizedBy 'jacocoTestCoverageVerification'
+}
+
+jacocoTestCoverageVerification {
+    // Q + 대문자로 시작하는 클래스 exclude (QueryDSL q 클래스)
+    def Qdomains = []
+    for (qPattern in "*.QA".."*.QZ") {
+        Qdomains.add(qPattern + "*")
+    }
+    violationRules {
+        rule {
+            element = 'CLASS'
+
+            limit {
+                counter = 'INSTRUCTION'
+                value = 'COVEREDRATIO'
+                minimum = 0.80
+            }
+
+            excludes = [] + Qdomains
+        }
+    }
+}
+
+//q클래스 디렉토리 위치
+sourceSets {
+    main {
+        java {
+            srcDirs = ["$projectDir/src/main/java", "$projectDir/build/generated"]
+        }
+    }
+}
+
+
+test {
+    useJUnitPlatform()
+}

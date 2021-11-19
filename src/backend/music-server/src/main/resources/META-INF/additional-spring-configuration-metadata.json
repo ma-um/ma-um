@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "server-url.diary",
+      "type": "java.lang.String",
+      "description": "Description for server-url.diary."
+    },
+    {
+      "name": "server-url.auth.base",
+      "type": "java.lang.String",
+      "description": "Description for server-url.auth.base."
+    }
+  ] }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/drawable/card_border.xml" value="0.2518518518518518" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.2518518518518518" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/drawable/pl_card_border.xml" value="0.2388888888888889" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/font/font.xml" value="0.1787037037037037" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/activity_bottom_navigation.xml" value="0.2064814814814815" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/activity_calendar.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/activity_configuration.xml" value="0.2064814814814815" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/activity_diary_detail.xml" value="0.22" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/activity_diary_write.xml" value="0.2935185185185185" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/activity_diary_write2.xml" value="0.2692502532928065" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/activity_emotion_custom.xml" value="0.22" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/activity_login.xml" value="0.5" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/activity_playlist.xml" value="0.2064814814814815" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/activity_splash.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/activity_timeline.xml" value="0.2064814814814815" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/anim_splash_logo.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/dialog_diary_write.xml" value="0.2692502532928065" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/frag_emotion_chart.xml" value="0.2692502532928065" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/frag_playlist.xml" value="0.25092592592592594" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/fragment_diary_card.xml" value="0.29259259259259257" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/fragment_empty.xml" value="0.2692502532928065" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/fragment_timeline.xml" value="0.2692502532928065" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/item_emotion_custom.xml" value="0.22" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/item_playlist.xml" value="0.22" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/item_timeline.xml" value="0.2692502532928065" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/layout/music_slider_item_container.xml" value="0.2692502532928065" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/menu/navigation_items.xml" value="0.2064814814814815" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/menu/search_menu.xml" value="0.2824074074074074" />
+        <entry key="..\:/Users/soulp/AndroidStudioProjects/Maum/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.17962962962962964" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

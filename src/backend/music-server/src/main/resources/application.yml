@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://3.34.42.249:33066/maum_music?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true&useSSL=false
+
+    hikari:
+      username: root
+      password: 1234
+  jpa:
+    hibernate:
+      naming:
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MariaDBDialect
+server:
+  port: 8093
+
+url:
+  auth:
+    base: http://localhost:8091/api/v1/user
+  diary:
+    base: http://localhost:8092/api/v1/diary
+  django:
+    base: k207.ssafy.io:8000
