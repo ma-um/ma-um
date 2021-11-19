@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Music Album Jacket Image -->
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/music_image_slider"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:adjustViewBounds="true"
+        app:riv_corner_radius="12dp" />
+
+    <!-- Music name -->
+    <TextView
+        android:id="@+id/detail_music_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="아이와 나의 바다"
+        android:textStyle="bold"
+        android:textSize="13dp" />
+
+    <!-- Music singer -->
+    <TextView
+        android:id="@+id/detail_music_singer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="아이유"
+        android:textSize="10dp" />
+
+</LinearLayout>
