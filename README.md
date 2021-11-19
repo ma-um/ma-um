@@ -8,7 +8,7 @@
 |------|---|---|
 |👦전도명|Distribution & Front-End|soulplay95@gmail.com|
 |🧑김민기|Back-End|terec@naver.com|
-|🧑장진우|NLP & Back-End||
+|🧑장진우|NLP & Back-End|zerone0512@gmail.com|
 |👦이현송|Recommendation Algorithm|lhs7615@naver.com|
 
 
