@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/pl_card_border"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Music jacket image -->
+        <ImageView
+            android:id="@+id/playlist_music_jacket"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/music_jacket" />
+
+        <!-- Music info -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:orientation="vertical">
+
+            <!-- Music name -->
+            <TextView
+                android:id="@+id/playlist_music_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="아이와 나의 바다"
+                android:textSize="10dp"
+                android:textStyle="bold" />
+
+            <!-- Singer -->
+            <TextView
+                android:id="@+id/playlist_singer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="아이유 (IU)"
+                android:textSize="7dp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_baseline_play_circle_24" />
+
+</RelativeLayout>
