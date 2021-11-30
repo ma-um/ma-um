@@ -56,6 +56,7 @@ class DiaryCardFragment : Fragment() {
 //        }).start()
 //        musicJacketImgView.setImageBitmap(bitmap)
         musicNameView.setText(arguments?.getString("musicName"))
+        Log.d("singer_", arguments?.getString("singer")!!)
         singerView.setText(arguments?.getString("singer"))
 
         Log.d("imageURL : ", "" + arguments?.getString("jacketUrl"))

@@ -108,7 +108,10 @@ public class WebClientDispatcherImpl implements WebClientDispatcher {
 
   @Override
   public Music findMusicByDiaryId(String diaryId) {
-    return getDummyMusic(diaryId);
+
+    return findAllMusicByDiaryId(diaryId).get(0);
+
+//    return getDummyMusic(diaryId);`
   }
 
   @Override

@@ -24,11 +24,11 @@ public class WebClientDispatcherImpl implements WebClientDispatcher {
   //  @Value("${url.auth.base}")
   private String authUrl = "http://localhost:8091/api/v1/user";
   //  @Value("${url.emotion.base}")
-  private String djangoServerBaseUrl = "http://localhost:8092/api/v1/";
+  private String djangoServerBaseUrl = "http://localhost:8000/";
 
-  private String diaryServer = "htttp://localhost:8000/";
-  private String emotionUrl = "emotion/diary2emotion";
-  private String recommendationUrl = "recommendation/music_recommendation";
+  private String diaryServer = "http://localhost:8092/api/v1/";
+  private String emotionUrl = "emotion/diary2emotion/";
+  private String recommendationUrl = "recommendation/music_recommendation/";
 
   private final Integer MAX_MUSIC_REC_COUNT = 3;
 
@@ -69,6 +69,7 @@ public class WebClientDispatcherImpl implements WebClientDispatcher {
       diaryEmotionResponse = webClient
           .post()
           .uri(uri)
+          .header("Content-Type", "application/json")
           .bodyValue(content)
           .accept(MediaType.APPLICATION_JSON)
           .retrieve()
@@ -90,6 +91,7 @@ public class WebClientDispatcherImpl implements WebClientDispatcher {
       MusicRecommendationWebClientResponse musicRecommendationWebClientResponse = webClient
           .post()
           .uri(uri)
+          .header("Content-Type", "application/json")
           .bodyValue(musicRecommendationRequest)
           .accept(MediaType.APPLICATION_JSON)
           .retrieve()

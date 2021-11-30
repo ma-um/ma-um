@@ -47,12 +47,14 @@ class TimelineFragment : Fragment() {
             val json = Gson().toJson(body?.data)
             val data = Gson().fromJson(json, DiaryCardListResponse::class.java)
 
+            Log.d("log_", data.toString())
+
             list = data.diaryCardList!!
 
-            Log.d("log_", "타임라인 리스트 받음 : " + list.get(0).date)
+//            Log.d("log_", "타임라인 리스트 받음 : " + list.get(0).date)
         }).start()
 
-        Thread.sleep(3000)
+        Thread.sleep(5000)
 
 //        thread {
 //            val body =

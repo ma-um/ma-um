@@ -7,15 +7,19 @@ from django.http import JsonResponse
 import requests
 from rest_framework.response import Response
 import json
-
+import logging
 
 @api_view(['POST'])
 def music_recommendation(request):
 
     # POST 로 emotions 를 받아오고 json 으로 불러오는 과정
-    response = request.POST['emotions']
-    json_acceptable_string = response.replace("'", "\"") 
-    emotion = json.loads(json_acceptable_string)
+    logger = logging.getLogger('test')
+    logger.error(request)
+    logger.error(request.body.decode('utf-8'))
+    logger.error(request.data)
+    emotion = request.data['emotions']
+    # json_acceptable_string = response.replace("'", "\"") 
+    # emotion = json.loads(json_acceptable_string)
     emotion = [emotion['fear'], emotion['surprise'], emotion['anger'], emotion['sadness'], emotion['neutrality'], emotion['happiness'], emotion['disgust'], emotion['pleasure'], emotion['embarrassment'], emotion['unrest'], emotion['bruise']]
 
     # 음악에 대한 감정을 스케일링
@@ -55,4 +59,13 @@ def music_recommendation(request):
             ]
         }
 
-    return Response({'status': 200, 'data': data}, status=200)
+    return JsonResponse({
+		"musicIdList" :[
+            {"id": int(musics[result[0]].pk)},
+            {"id": int(musics[result[1]].pk)},
+            {"id": int(musics[result[2]].pk)},
+            {"id": int(musics[result[3]].pk)},
+            {"id": int(musics[result[4]].pk)},
+            {"id": int(musics[result[5]].pk)}
+            ]
+        }, status=200)

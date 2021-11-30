@@ -3,11 +3,17 @@ from django.http import JsonResponse
 import torch
 import gluonnlp as nlp
 from .apps import EmotionConfig, BERTClassifier, BERTDataset
-
+import logging
 @api_view(['POST'])
 def diary2emotion(request):
-    
-    input_data = request.POST['content']
+    logger = logging.getLogger('test')
+    logger.error(request)
+    logger.error(request.body.decode('utf-8'))
+    # logger.error(request.data)
+    # input_data = request.data['content']
+    input_data = request.body.decode('utf-8')
+    # logger.error('13221323o')
+
     device = torch.device("cpu")
     bertmodel, vocab = EmotionConfig.bertmodel, EmotionConfig.vocab
     max_len = 64
@@ -51,4 +57,5 @@ def diary2emotion(request):
         'result': f'{logits}'
     }
     
-    return JsonResponse({'data': data}, safe=True, json_dumps_params={'ensure_ascii': False}, status=200) 
+    # return JsonResponse({'data': data}, safe=True, json_dumps_params={'ensure_ascii': False}, status=200) 
+    return JsonResponse({'content': input_data, "result": f'{logits}'}) 
