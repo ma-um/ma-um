@@ -40,6 +40,7 @@ class EmotionChartFragment : Fragment() {
 
         // emotion data
         val data: DetailEmotions = arguments?.getSerializable("emotions") as DetailEmotions
+        Log.d("log__", data.sadness!!.toString())
 
         // create chart
         val pieChart: PieChart = view.findViewById(R.id.pieChart)

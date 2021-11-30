@@ -92,6 +92,8 @@ class DiaryDetailActivity : AppCompatActivity() {
                         val json = Gson().toJson(response.body()?.data)
                         val data = Gson().fromJson(json, DiaryDetailResponse::class.java)
 
+                            Log.d("__topemotion", data.emotions?.topEmotion.toString())
+
                         // 데이터 - 뷰 바인딩
                         date.text = data.date
                         topEmotion.setImageResource(

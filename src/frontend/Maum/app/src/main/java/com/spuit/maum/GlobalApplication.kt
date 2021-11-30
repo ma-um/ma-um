@@ -123,6 +123,7 @@ class GlobalApplication : Application() {
         return token
     }
 
+
     /**
      * drawable의 감정 이모티콘 이미지 파일 ID 가져오기
      */

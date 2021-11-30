@@ -54,7 +54,7 @@ class TimelineFragment : Fragment() {
 //            Log.d("log_", "타임라인 리스트 받음 : " + list.get(0).date)
         }).start()
 
-        Thread.sleep(5000)
+        Thread.sleep(2000)
 
 //        thread {
 //            val body =
@@ -202,6 +202,7 @@ class RecyclerViewAdapter(
         val item = searchedList!!.get(position)
 
         holder.date.setText(item.date)
+        Log.d("emotions?", "" + holder.topEmotion)
         holder.topEmotion.setImageResource(
             (GlobalApplication.ApplicationContext() as GlobalApplication).getEmoticonId(item.topEmotion)
         )
