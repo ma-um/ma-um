@@ -33,3 +33,4 @@ services:
             build: ./music-server
         restart: always
 
+
