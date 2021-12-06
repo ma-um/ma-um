@@ -81,7 +81,6 @@ class CalendarFragment : Fragment() {
                             // Data parsing
                             val json = Gson().toJson(response.body()?.data)
                             val data = Gson().fromJson(json, DiaryCard::class.java)
-
                             // + 버튼 숨기기
                             plusBtn.hide()
 
@@ -94,6 +93,7 @@ class CalendarFragment : Fragment() {
                             bundle.putString("jacketUrl", data.topMusic!!.jacketUrl)
                             bundle.putString("musicName", data.topMusic!!.name)
                             bundle.putString("singer", data.topMusic!!.singer)
+                            Log.d("singer__", data.topMusic!!.singer.toString())
                             diaryCardFragment.arguments = bundle
 
                             // 일기 요약 카드 Fragment 동적으로 추가

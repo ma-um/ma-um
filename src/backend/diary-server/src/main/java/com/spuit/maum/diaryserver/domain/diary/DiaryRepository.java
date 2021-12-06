@@ -22,5 +22,5 @@ public interface DiaryRepository extends JpaRepository<Diary, String> {
   Optional<Diary> findByUserIdAndRegistrationDateBetween(String userId, LocalDateTime first,
       LocalDateTime last);
 
-  List<Diary> findAllByUserIdOrderByRegistrationDate(String userId);
+  List<Diary> findAllByUserIdOrderByRegistrationDateDesc(String userId);
 }

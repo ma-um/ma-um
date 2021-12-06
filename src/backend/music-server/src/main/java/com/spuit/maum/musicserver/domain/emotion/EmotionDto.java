@@ -1,5 +1,6 @@
 package com.spuit.maum.musicserver.domain.emotion;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,6 +40,21 @@ public class EmotionDto {
         emotionValueList.get(4), emotionValueList.get(5), emotionValueList.get(6),
         emotionValueList.get(7), emotionValueList.get(8), emotionValueList.get(9),
         emotionValueList.get(10));
+  }
+  public EmotionDto resetTopEmotionValue() {
+    Field[] fields = this.getClass().getDeclaredFields();
+    try {
+      for (Field f : fields) {
+        f.setAccessible(true);
+        if (f.getType() != Integer.class || (Integer) f.get(this) >= 0) {
+          continue;
+        }
+        f.set(this, -(int) f.get(this));
+      }
+    } catch (IllegalAccessException ex) {
+      throw new RuntimeException();
+    }
+    return this;
   }
 
   public Emotion toEmotion(String id) {

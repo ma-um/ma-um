@@ -6,8 +6,10 @@ import com.spuit.maum.musicserver.domain.emotion.EmotionDto;
 import com.spuit.maum.musicserver.domain.emotion.EmotionRepository;
 import com.spuit.maum.musicserver.infrastructure.webclient.WebClientDispatcher;
 import com.spuit.maum.musicserver.web.request.emotion.SetCustomEmotionRequest;
+import com.spuit.maum.musicserver.web.response.emotion.DiaryEmotionResponse;
 import com.spuit.maum.musicserver.web.response.emotion.GetEmotionResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
  * @version 1.0.0
  */
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class EmotionServiceImpl implements EmotionService {
 
@@ -27,8 +30,10 @@ public class EmotionServiceImpl implements EmotionService {
   @Override
   public GetEmotionResponse analysisEmotionByContent(String content) {
 
+    DiaryEmotionResponse response = webClientDispatcher.diary2EmotionRequest(content);
+    log.info("response - {}", response);
     return new GetEmotionResponse(
-        EmotionDto.of(webClientDispatcher.diary2EmotionRequest(content).resultStringToList()));
+            EmotionDto.of(response.resultStringToList()));
   }
 
   @Override

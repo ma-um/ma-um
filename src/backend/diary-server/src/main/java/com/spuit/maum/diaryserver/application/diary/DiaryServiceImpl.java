@@ -95,7 +95,7 @@ public class DiaryServiceImpl implements DiaryService {
 
   @Override
   public DiaryTimelineResponse findTimelineByUserId(String userId) {
-    List<Diary> diaryList = diaryRepository.findAllByUserIdOrderByRegistrationDate(userId);
+    List<Diary> diaryList = diaryRepository.findAllByUserIdOrderByRegistrationDateDesc(userId);
     List<DiaryCardResponse> diaryCardList = new LinkedList<>();
     diaryList.forEach(diary ->
         diaryCardList.add(createDiaryCard(diary))
@@ -114,7 +114,7 @@ public class DiaryServiceImpl implements DiaryService {
             first, last).orElseThrow(() -> new ResourceNotFoundException("date", Diary.class,
             first.toLocalDate().toString()));
 
-    Emotion emotion = webClientDispatcher.findEmotionByDiaryId(diary.getId());
+    Emotion emotion = webClientDispatcher.findEmotionByDiaryId(diary.getId()).setTopEmotionName().resetTopEmotionValue();
     List<Music> musicList = webClientDispatcher.findAllMusicByDiaryId(diary.getId());
 
     return DiaryDetailResponse.builder().date(first.toLocalDate()).musicList(musicList)
@@ -125,16 +125,16 @@ public class DiaryServiceImpl implements DiaryService {
 
     querydsl로 리팩토링
    */
-  @Override
-  public List<String> getAllDiaryByUserId(String userId) {
+    @Override
+    public List<String> getAllDiaryByUserId(String userId) {
 
-    return diaryRepository.findAllByUserIdOrderByRegistrationDate(userId).stream().map(
-        BaseEntity::getId).collect(
+      return diaryRepository.findAllByUserIdOrderByRegistrationDateDesc(userId).stream().map(
+              BaseEntity::getId).collect(
         Collectors.toList());
   }
 
   private DiaryCardResponse createDiaryCard(Diary diary) {
-    Emotion emotion = webClientDispatcher.findEmotionByDiaryId(diary.getId());
+    Emotion emotion = webClientDispatcher.findEmotionByDiaryId(diary.getId()).setTopEmotionName().resetTopEmotionValue();
     Music music = webClientDispatcher.findMusicByDiaryId(diary.getId());
 
     return new DiaryCardResponse(diary, music, emotion.getTopEmotion());

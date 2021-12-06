@@ -51,7 +51,7 @@ public class MusicServiceImpl implements MusicService {
         .forEach(diaryMusic -> existingMusicIdList.add(diaryMusic.getMusicId()));
 
     List<MusicId> musicIdList =
-        webClientDispatcher.musicRecommendation(new MusicRecommendationRequest(emotionDto,
+        webClientDispatcher.musicRecommendation(new MusicRecommendationRequest(emotionDto.resetTopEmotionValue(),
             existingMusicIdList)).getMusicIdList();
 
     List<MusicDto> musicDtoList = new ArrayList<>();

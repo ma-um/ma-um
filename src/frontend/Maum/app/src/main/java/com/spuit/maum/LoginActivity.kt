@@ -22,6 +22,11 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val sp = this.getSharedPreferences("login_sp", Context.MODE_PRIVATE)
+        val editor = sp.edit()
+        editor.putString("token", "" + 7777)
+        editor.commit()
+
         // 자동로그인 - 화면 그리기 전에 로그인 체크하고 로그인 되어 있으면 캘린더 액티비티로 넘어감
         if ((application as GlobalApplication).checkIsLogin()) {
             finish()
@@ -48,6 +53,8 @@ class LoginActivity : AppCompatActivity() {
     fun login(activity: Activity) {
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
+                Log.d("log__", "" + token)
+                Log.d("log__", "" + error)
                 Toast.makeText(activity, "로그인 실패: " + error, Toast.LENGTH_LONG).show()
             } else if (token != null) {
                 // 토큰 정보 보기
